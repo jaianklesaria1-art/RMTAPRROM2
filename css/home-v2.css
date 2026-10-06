@@ -787,3 +787,7 @@ body.can-docks-beer .won-card:first-child .won-icon { visibility: hidden; }
 .bs-pop .bs-specs, .bs-pop .bs-specs div, .bs-pop .bs-specs div:nth-child(odd) { border-color: rgba(241,237,228,.3) !important; }
 .bs-pop .bs-small { color: #ffd400 !important; }
 .bs-pop .bs-desc { color: #e6e1d7 !important; font-family: var(--ui) !important; }
+
+/* Beats card: a 3D speaker render instead of the drawn icon (Jai, 2026-10-07) */
+.won-icon-3d { width: 118px !important; height: auto; filter: drop-shadow(0 16px 20px rgba(0,0,0,.55)); }
+@media (max-width: 760px) { .won-icon-3d { width: 96px !important; } }
