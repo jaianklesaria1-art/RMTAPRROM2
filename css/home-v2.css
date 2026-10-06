@@ -791,3 +791,8 @@ body.can-docks-beer .won-card:first-child .won-icon { visibility: hidden; }
   .won-icon.won-icon-r { right: auto; left: 18px; transform: translate(-28%, -46%) rotate(-6deg) scaleX(-1); }   /* mirrored so the speaker faces right */
   .won-card:hover .won-icon.won-icon-r { transform: translate(-28%, -54%) rotate(-12deg) scale(-1.06, 1.06); }
 }
+
+/* phones: breathing room between the Rolling Mills Taproom section and the gallery below it (Jai) */
+@media (max-width: 760px) {
+  body .hq.hq3 { padding-bottom: 64px; }
+}
