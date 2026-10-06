@@ -1,0 +1,42 @@
+/* =====================================================================
+   LOADER: black screen, a chrome blackletter R (Circus Ace) draws its
+   outline, fills with polished metal, a glint sweeps across, sparkles,
+   then the screen rolls up like a shutter (after Soul Street's intro).
+   NOTE: Circus Ace is a personal-use demo. The client must buy the
+   commercial licence before launch, or swap the glyph.
+   ===================================================================== */
+.loader { position: fixed; inset: 0; z-index: 300; display: grid; place-content: center; justify-items: center; gap: 22px; background: #0b0b0b;
+  clip-path: inset(0 0 0 0); animation: ldSafety 0s 7s forwards; }
+.skip-loader .loader { display: none; }
+.loader.out { clip-path: inset(0 0 100% 0); transition: clip-path .7s cubic-bezier(.75, 0, .2, 1); }
+.loader::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: #fff; opacity: 0; transition: opacity .2s; }
+.loader.out::after { opacity: 1; }
+
+.ld-r { width: min(48vw, 270px); height: auto; overflow: visible; }
+.ld-outline { fill: none; stroke: #fff; stroke-width: 3.5; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0; }
+.ld-fill { opacity: 0; }
+.ld-glint { opacity: 0; }
+.ld-spark { fill: #fff; opacity: 0; transform-box: fill-box; transform-origin: center; }
+
+.loader.play .ld-outline { animation: ldDraw 1.3s .1s cubic-bezier(.55, .05, .3, 1) forwards, ldFadeOut .5s 1.5s forwards; }
+.loader.play .ld-fill { animation: ldFill .6s 1.15s ease-out forwards; }
+.loader.play .ld-glint { animation: ldGlint .8s 1.7s cubic-bezier(.4, 0, .2, 1) forwards; }
+.loader.play .s1 { animation: ldSpark .7s 2.15s ease-out forwards; }
+.loader.play .s2 { animation: ldSpark .6s 2.3s ease-out forwards; }
+.loader.play .s3 { animation: ldSpark .6s 2.4s ease-out forwards; }
+.ld-cap { margin: 0; font: 600 .74rem var(--mono); letter-spacing: .34em; text-transform: uppercase; color: var(--chalk); opacity: 0; }
+.ld-cap span { color: var(--muted); }
+.loader.play .ld-cap { animation: ldFade .6s 1.4s forwards; }
+
+/* Flow video version (set loaderVideo: true in data.js) */
+.ld-video { width: min(70vw, 520px); height: auto; }
+.loader.has-video .ld-r { display: none; }
+
+@keyframes ldDraw { from { opacity: 1; } to { stroke-dashoffset: 0; opacity: 1; } }
+@keyframes ldFadeOut { to { opacity: 0; } }
+@keyframes ldFill { from { opacity: 0; filter: brightness(2.2); } to { opacity: 1; filter: brightness(1); } }
+@keyframes ldGlint { 0% { opacity: 1; transform: translateX(0) skewX(-18deg); } 100% { opacity: 1; transform: translateX(230%) skewX(-18deg); } }
+@keyframes ldSpark { 0% { opacity: 0; transform: scale(0) rotate(0); } 45% { opacity: 1; transform: scale(1.1) rotate(45deg); } 100% { opacity: 0; transform: scale(.4) rotate(90deg); } }
+@keyframes ldFade { to { opacity: 1; } }
+@keyframes ldSafety { to { visibility: hidden; } } /* never trap anyone if the script fails */
+@media (prefers-reduced-motion: reduce) { .loader { display: none; } }

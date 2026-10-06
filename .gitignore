@@ -1,0 +1,5 @@
+# version 1 website: everything here except backups and scratch
+assets/video/backup-*/
+assets/menu-src/
+__pycache__/
+*.zip

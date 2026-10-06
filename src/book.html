@@ -1,0 +1,168 @@
+<section class="page-head bk-head" data-accent="yellow">
+  <div class="wrap">
+    <p class="kicker">Save a spot</p>
+    <h1 class="display h1">Book a <em class="spray">table</em></h1>
+    <p class="lead">Fill in your ticket, tear off the stub, and it lands with us on WhatsApp. We confirm your table there.</p>
+  </div>
+</section>
+
+<section class="section section-tight bk" data-accent="yellow" aria-label="Booking">
+  <div class="wrap book">
+    <form class="form bk-form" id="book-form" novalidate>
+      <div class="form-errors" role="alert" tabindex="-1" hidden></div>
+
+      <fieldset class="bk-step">
+        <legend><span class="bk-no">01</span> Who's coming</legend>
+        <div class="bk-grid">
+        <div class="field">
+          <label for="b-name">Your name</label>
+          <input id="b-name" name="name" autocomplete="name" placeholder="As we should call you" required>
+        </div>
+        <div class="field">
+          <label for="b-age">Your age</label>
+          <input id="b-age" name="age" type="number" inputmode="numeric" min="1" max="120" placeholder="21+" aria-describedby="b-age-hint" required>
+          <p class="hint" id="b-age-hint">We pour beer, so the person booking must be 21 or over. Bring ID.</p>
+        </div>
+        <div class="field field-full" data-phone-field hidden>
+          <label for="b-phone">Mobile number</label>
+          <input id="b-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="98765 43210" aria-describedby="b-phone-hint">
+          <p class="hint" id="b-phone-hint">We'll send your booking confirmation to this number.</p>
+        </div>
+        <div class="field field-full">
+          <label for="b-guests" id="b-guests-l">Table for how many?</label>
+          <div class="bk-count">
+            <button class="bk-step-btn" type="button" data-guests="-1" aria-label="One fewer">&minus;</button>
+            <input id="b-guests" name="guests" type="number" inputmode="numeric" min="1" max="30" value="2" aria-describedby="b-guests-pints" required>
+            <button class="bk-step-btn" type="button" data-guests="1" aria-label="One more">+</button>
+            <span class="bk-pints" id="b-guests-pints" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="field-full callout" data-big-group hidden>
+          <p><b>10 or more of you?</b> For big groups we can plan a set menu or keep an area for you.</p>
+          <p><a class="btn btn-line btn-sm" href="parties.html">See private parties</a> <span class="or">or just send the request below</span></p>
+        </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="bk-step">
+        <legend><span class="bk-no">02</span> When</legend>
+        <div class="bk-grid">
+        <div class="field field-full">
+          <span class="bk-label" id="b-when-l">Pick a day, then a time</span>
+          <div class="cal-card" id="b-when" tabindex="-1" data-cal-card>
+            <div class="cal" data-cal role="group" aria-labelledby="b-when-l">
+              <div class="cal-head">
+                <button class="cal-nav" type="button" data-cal-step="-1" aria-label="Previous month">&larr;</button>
+                <p class="cal-month" data-cal-month aria-live="polite"></p>
+                <button class="cal-nav" type="button" data-cal-step="1" aria-label="Next month">&rarr;</button>
+              </div>
+              <div class="cal-dow" aria-hidden="true"><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span></div>
+              <div class="cal-grid" data-cal-grid></div>
+              <p class="cal-key"><span class="cal-key-closed"></span> Closed</p>
+            </div>
+            <div class="slots">
+              <p class="slots-day" data-slots-day>Pick a day</p>
+              <div class="slots-list" data-slots role="group" aria-label="Available times"></div>
+            </div>
+          </div>
+          <div class="cal-native">
+            <label for="b-date">Date</label>
+            <input id="b-date" name="date" type="date" required tabindex="-1" aria-hidden="true">
+            <label for="b-time">Time</label>
+            <select id="b-time" name="time" required tabindex="-1" aria-hidden="true"><option value="">Pick a date first</option></select>
+          </div>
+        </div>
+        <p class="field-full hint" data-closed-msg hidden></p>
+        </div>
+      </fieldset>
+
+      <fieldset class="bk-step">
+        <legend><span class="bk-no">03</span> Make it yours</legend>
+        <div class="bk-grid">
+        <div class="field field-full">
+          <span class="bk-label" id="b-seat-l">Where would you like to sit?</span>
+          <div class="bk-chips" role="radiogroup" aria-labelledby="b-seat-l">
+            <label><input type="radio" name="seating" value="No preference" checked><span>Anywhere</span></label>
+            <label><input type="radio" name="seating" value="Bar counter"><span>Bar counter</span></label>
+            <label><input type="radio" name="seating" value="High table"><span>High table</span></label>
+            <label><input type="radio" name="seating" value="Wall side"><span>By the murals</span></label>
+          </div>
+        </div>
+        <div class="field field-full">
+          <span class="bk-label" id="b-occ-l">What's the occasion? <span class="opt">(optional)</span></span>
+          <div class="bk-chips" role="radiogroup" aria-labelledby="b-occ-l">
+            <label><input type="radio" name="occasion" value="Just beers" checked><span>Just beers</span></label>
+            <label><input type="radio" name="occasion" value="Birthday"><span>Birthday</span></label>
+            <label><input type="radio" name="occasion" value="Date night"><span>Date night</span></label>
+            <label><input type="radio" name="occasion" value="Work drinks"><span>Work drinks</span></label>
+            <label><input type="radio" name="occasion" value="Match night"><span>Match night</span></label>
+          </div>
+        </div>
+        <div class="field field-full">
+          <label for="b-notes">Anything we should know? <span class="opt">(optional)</span></label>
+          <textarea id="b-notes" name="notes" rows="2" placeholder="A high chair, a cake, someone's first craft beer…"></textarea>
+        </div>
+        </div>
+      </fieldset>
+
+      <div class="field-full bk-submit">
+        <button class="btn btn-solid btn-lg" type="submit">Send request on WhatsApp</button>
+        <p class="hint">Next you'll get a ticket. Tear off the stub and WhatsApp opens with everything filled in.</p>
+      </div>
+    </form>
+
+    <div class="bk-ticket-wrap" data-book-done hidden tabindex="-1" aria-labelledby="bk-ticket-h">
+      <h2 class="bk-ticket-h" id="bk-ticket-h">Almost booked!</h2>
+      <p class="bk-ticket-sub" data-ticket-sub>Tear off the stub to send your request to us on WhatsApp.</p>
+      <div class="bk-ticket" data-ticket></div>
+      <div class="cta-row bk-ticket-actions">
+        <button class="btn btn-solid" type="button" data-tear>Tear &amp; send</button>
+        <button class="btn btn-ghost rb-static" type="button" data-book-again>Edit request</button>
+      </div>
+      <div class="bk-booked" data-booked hidden>
+        <p class="bk-demo" data-booked-demo hidden>Demo mode: this booking was not sent anywhere.</p>
+        <dl class="bk-booked-rows" data-booked-rows></dl>
+        <div class="cta-row">
+          <button class="btn btn-line rb-static bk-soft" type="button" data-ics>Add to calendar</button>
+          <a class="btn btn-line rb-static bk-soft" href="https://www.google.com/maps/search/?api=1&amp;query=19.15123,72.8317709" target="_blank" rel="noopener" data-track="Directions">Get directions</a>
+          <a class="btn btn-ghost rb-static bk-soft" href="tel:+917400407711" data-track="Call">Call us</a>
+        </div>
+      </div>
+      <div class="bk-fail" data-booking-fail hidden>
+        <p><b>We couldn't save your booking just now.</b> Your table isn't booked yet. Send it to us on WhatsApp instead, or call us.</p>
+        <div class="cta-row">
+          <a class="btn btn-solid rb-static" data-wa-fallback href="#" target="_blank" rel="noopener">Send on WhatsApp</a>
+          <a class="btn btn-line rb-static bk-soft" href="tel:+917400407711" data-track="Call">Call us</a>
+        </div>
+      </div>
+      <div class="bk-sent" data-sent hidden>
+        <p><b>Your stub is on its way.</b> Hit send in WhatsApp and we'll confirm your table there. It's not booked until we reply.</p>
+        <div class="cta-row">
+          <a class="btn btn-line rb-static bk-soft" data-wa-again href="#" target="_blank" rel="noopener">WhatsApp didn't open?</a>
+          <button class="btn btn-line rb-static bk-soft" type="button" data-share-ticket hidden>Share ticket image</button>
+          <button class="btn btn-line rb-static bk-soft" type="button" data-copy-booking>Copy details</button>
+          <a class="btn btn-ghost rb-static bk-soft" href="tel:+917400407711" data-track="Call">Call us</a>
+        </div>
+      </div>
+    </div>
+
+    <aside class="book-side">
+      <h2 class="h4">How it works</h2>
+      <ol class="steps">
+        <li><b>Fill in your ticket.</b> Name, age, how many of you and when.</li>
+        <li data-step-wa><b>Tear off the stub.</b> WhatsApp opens with your booking details.</li>
+        <li data-step-wa><b>We confirm.</b> The taproom team replies on WhatsApp. Then your table's ready.</li>
+        <li data-step-api hidden><b>Tear off the stub.</b> Your booking is saved with us straight away.</li>
+        <li data-step-api hidden><b>We confirm.</b> The taproom confirms your table on the number you gave.</li>
+      </ol>
+      <p class="sample-note">Booking rules (time slots, how far ahead, deposits) are still to be confirmed by the taproom.</p>
+      <p class="status status-inline" data-status></p>
+    </aside>
+  </div>
+</section>
+
+<!-- Netlify Forms reads this hidden copy at deploy time; the real form above posts the same fields to it with JavaScript -->
+<form name="table-booking" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input name="bot-field"><input name="requestNo"><input name="name"><input name="age"><input name="phone"><input name="guests">
+  <input name="date"><input name="time"><input name="seating"><input name="occasion"><textarea name="notes"></textarea><input name="createdAt">
+</form>

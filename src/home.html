@@ -1,0 +1,245 @@
+<!-- ============ HERO: Google Flow video of the wall being tagged ============ -->
+<section class="vhero" aria-labelledby="hero-h">
+  <video class="vhero-video" muted playsinline preload="none" poster="assets/video/hero-video-poster.webp" data-hero-video aria-hidden="true"></video>
+  <div class="vhero-shade" aria-hidden="true"></div>
+  <div class="vhero-tag" aria-hidden="true">
+    <div class="tl"><img src="assets/video/tag-line-1.webp" alt="" width="1418" height="240"><span class="drip" style="left:11.07%;top:76.67%;--len:85%;--d:1.33s;--t:2.63s"><i></i></span><span class="drip" style="left:22.5%;top:77.08%;--len:85%;--d:0.96s;--t:2.63s"><i></i></span><span class="drip" style="left:44.15%;top:77.92%;--len:55%;--d:0.72s;--t:2.21s"><i></i></span><span class="drip" style="left:55.08%;top:77.92%;--len:105%;--d:1.26s;--t:1.71s"><i></i></span><span class="drip" style="left:62.13%;top:76.67%;--len:70%;--d:0.68s;--t:2.25s"><i></i></span><span class="drip" style="left:78.0%;top:77.92%;--len:38%;--d:1.09s;--t:2.08s"><i></i></span><span class="drip" style="left:95.35%;top:78.33%;--len:85%;--d:1.14s;--t:2.34s"><i></i></span></div>
+    <div class="tl"><img src="assets/video/tag-line-2.webp" alt="" width="1287" height="223"><span class="drip" style="left:18.34%;top:75.34%;--len:55%;--d:1.51s;--t:2.6s"><i></i></span><span class="drip" style="left:33.18%;top:74.89%;--len:38%;--d:1.0s;--t:1.83s"><i></i></span><span class="drip" style="left:55.56%;top:75.78%;--len:55%;--d:1.49s;--t:2.53s"><i></i></span><span class="drip" style="left:62.63%;top:74.89%;--len:70%;--d:1.35s;--t:2.61s"><i></i></span><span class="drip" style="left:69.7%;top:75.78%;--len:105%;--d:1.16s;--t:1.95s"><i></i></span><span class="drip" style="left:77.78%;top:76.23%;--len:38%;--d:1.55s;--t:2.15s"><i></i></span><span class="drip" style="left:93.08%;top:78.48%;--len:70%;--d:1.32s;--t:2.26s"><i></i></span></div>
+  </div>
+  <div class="wrap vhero-in">
+    <!-- the visible headline was removed at Jai's request; kept for screen readers and search engines -->
+    <h1 id="hero-h" class="sr">Rolling Mills Taproom: brewed in Kandivali, poured in Andheri West, Mumbai</h1>
+  </div>
+  <div class="vhero-ctrls">
+    <button class="vhero-pause vhero-sound" type="button" data-video-sound aria-pressed="false" hidden><span class="snd-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path class="snd-wave" d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path class="snd-x" d="M16 9l5 6M21 9l-5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><span class="snd-label">Sound on</span></button>
+    <button class="vhero-pause" type="button" data-video-toggle aria-pressed="false" hidden><span class="pz-icon" aria-hidden="true"></span><span class="pz-label">Pause video</span></button>
+  </div>
+  <a class="scroll-cue" href="#beers"><span>Scroll</span><i aria-hidden="true"></i></a>
+</section>
+
+<!-- ============ BEERS: one can on stage, details either side (after BrewDistrict24) ============ -->
+<section class="bstage" id="beers" aria-labelledby="beers-h">
+  <h2 id="beers-h" class="sr">Our beers</h2>
+  <div class="wrap bs" data-stage tabindex="0" role="group" aria-roledescription="carousel" aria-label="Our beers. Use the arrow keys to switch beers.">
+    <div class="bs-left">
+      <p class="bs-kick">Discover our beers</p>
+      <h3 class="display bs-name" data-bs-name></h3>
+      <p class="bs-abv" data-bs-abv></p>
+      <p class="bs-label">Style</p>
+      <p class="bs-style" data-bs-style></p>
+    </div>
+    <div class="bs-can">
+      <div class="bs-frame" aria-hidden="true"></div>
+      <canvas class="bs-canvas" aria-hidden="true"></canvas>
+      <img class="bs-fallback" alt="" hidden>
+      <p class="bs-hint" aria-hidden="true">Drag to turn</p>
+    </div>
+    <div class="bs-right">
+      <p class="bs-tagline" data-bs-tagline></p>
+      <p class="bs-desc" data-bs-desc></p>
+      <dl class="bs-specs" data-bs-specs></dl>
+      <p class="bs-small" data-bs-small></p>
+      <div class="cta-row">
+        <a class="btn btn-solid" href="https://www.airmenus.in/rollingmills/order" target="_blank" rel="noopener" data-track="Order beer">Order on AirMenus<span class="sr"> (opens AirMenus)</span></a>
+        <a class="btn btn-line btn-glass" data-bs-details href="on-tap.html">Details</a>
+      </div>
+    </div>
+    <div class="bs-nav">
+      <button class="bs-arrow" type="button" data-dir="-1" aria-label="Previous beer">←</button>
+      <p class="bs-count" aria-live="polite"><b data-bs-i>01</b> / <span data-bs-n>09</span> <span class="bs-count-name" data-bs-label></span></p>
+      <button class="bs-arrow" type="button" data-dir="1" aria-label="Next beer">→</button>
+    </div>
+  </div>
+  <p class="wrap bs-foot"><span data-updated></span> · <a href="on-tap.html">Full tap list →</a> · <span class="bs-note-inline">3D can is a concept render with the real label art.</span></p>
+</section>
+
+<!-- ============ ABOUT: graffiti-wall background (v2), copy centred ============ -->
+<section class="about about-simple" id="about" aria-labelledby="about-h">
+  <div class="wrap about-center">
+    <p class="about-kicker">About us</p>
+    <h2 id="about-h" class="about-title">From the mill <em>to the wall</em></h2>
+    <p class="about-text">Rolling Mills brews every beer at its own brewhouse in Kandivali West, with Weyermann malt from Bamberg. Then it comes down the road, fresh, to our taproom on New Link Road: a room painted from floor to ceiling.</p>
+    <p class="about-links"><a href="story.html">Read our story →</a></p>
+  </div>
+</section>
+
+
+<!-- ============ WHAT'S ON ============ -->
+<section class="won" aria-labelledby="won-h">
+  <div class="wrap">
+    <h2 id="won-h" class="won-title"><span class="won-text">What's on?</span><canvas class="won-fuzz" aria-hidden="true"></canvas></h2>
+    <div class="won-grid">
+
+      <article class="won-card" style="--tilt:-2.2deg">
+        <svg class="won-icon" viewBox="0 0 120 130" aria-hidden="true">
+          <path d="M84 46h14a16 16 0 0 1 0 32H84" fill="none" stroke="#ff7a1a" stroke-width="10"/>
+          <rect x="18" y="30" width="68" height="92" rx="8" fill="#ff7a1a"/>
+          <path d="M34 50v58M52 50v58M70 50v58" stroke="#0d0d0d" stroke-width="5" stroke-linecap="round" opacity=".55"/>
+          <path d="M14 34c0-14 12-20 22-16 4-10 20-12 26-2 8-8 24-4 26 8 8 2 10 12 4 18H18c-4-2-5-5-4-8z" fill="#f1ede4"/>
+          <circle cx="40" cy="26" r="4" fill="#0d0d0d" opacity=".15"/><circle cx="66" cy="22" r="3" fill="#0d0d0d" opacity=".15"/>
+        </svg>
+        <h3 class="won-h">Beer</h3>
+        <p><span data-won-beers>Our</span> house beers, brewed in Kandivali and poured fresh on New Link Road.</p>
+        <a class="won-btn" href="on-tap.html">Tell me more<span class="sr"> about our beer</span></a>
+      </article>
+
+      <article class="won-card" style="--tilt:1.6deg">
+        <svg class="won-icon" viewBox="0 0 130 120" aria-hidden="true">
+          <path d="M14 56c0-30 24-46 51-46s51 16 51 46z" fill="#ff7a1a"/>
+          <g fill="#f1ede4"><ellipse cx="42" cy="32" rx="4" ry="2.5" transform="rotate(-20 42 32)"/><ellipse cx="64" cy="24" rx="4" ry="2.5"/><ellipse cx="86" cy="32" rx="4" ry="2.5" transform="rotate(20 86 32)"/><ellipse cx="54" cy="42" rx="4" ry="2.5"/><ellipse cx="76" cy="42" rx="4" ry="2.5"/></g>
+          <path d="M8 62q8-8 16 0t16 0 16 0 16 0 16 0 16 0 16 0 10 0" fill="none" stroke="#f1ede4" stroke-width="6" stroke-linecap="round"/>
+          <rect x="10" y="68" width="110" height="18" rx="9" fill="#0d0d0d" stroke="#ff7a1a" stroke-width="5"/>
+          <path d="M12 92h106v6a14 14 0 0 1-14 14H26a14 14 0 0 1-14-14z" fill="#ff7a1a"/>
+        </svg>
+        <h3 class="won-h">Food</h3>
+        <p>Bar food built for beer, with plenty for veg and non-veg crowds. See what goes with what.</p>
+        <a class="won-btn" href="menu.html?tab=food">Tell me more<span class="sr"> about our food</span></a>
+      </article>
+
+      <article class="won-card" style="--tilt:-1.2deg">
+        <svg class="won-icon won-icon-r" viewBox="0 0 110 130" aria-hidden="true">
+          <g transform="rotate(14 55 65)">
+            <rect x="14" y="8" width="82" height="114" rx="8" fill="#ff7a1a"/>
+            <circle cx="55" cy="40" r="20" fill="#0d0d0d"/><circle cx="55" cy="40" r="11" fill="#f1ede4"/><circle cx="55" cy="40" r="4" fill="#0d0d0d"/>
+            <circle cx="55" cy="90" r="22" fill="#0d0d0d"/><circle cx="55" cy="90" r="13" fill="#f1ede4"/><circle cx="55" cy="90" r="5" fill="#0d0d0d"/>
+          </g>
+        </svg>
+        <h3 class="won-h">Beats</h3>
+        <p>Music nights, quizzes, screenings and tap takeovers.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ TAPROOM HQ: inside the warehouse (style after Flying Monkeys brewery page, copy after Beer Zombies HQ) ============ -->
+<section class="hq hq3" id="hq" aria-labelledby="hq-h">
+  <img class="hq3-bg" src="assets/photos/hq-warehouse.webp" alt="" width="1536" height="1024" loading="lazy">
+  <p class="hq-neon hq3-neon" aria-hidden="true">Rolling Mills <span>Taproom</span></p>
+  <div class="hq3-stage">
+    <div class="hq3-fridge">
+      <span class="hq3-glow" aria-hidden="true"></span>
+      <img src="assets/photos/hq-fridge-cut.webp" alt="A glowing beer fridge stocked with Rolling Mills cans (illustration)" width="623" height="1100" loading="lazy">
+      <span class="hq3-shadow" aria-hidden="true"></span>
+    </div>
+    <div class="hq-box hq3-box">
+      <div class="hq3-col">
+      <h2 id="hq-h" class="hq-title">Rolling Mills Taproom</h2>
+      <p class="hq-sub">The best brewery in Mumbai</p>
+      <div class="hq-btns">
+        <a class="btn btn-solid" href="book.html" data-track="Book a table">Book a table</a>
+        <a class="btn btn-line hq-btn-line" href="#hours">Opening hours</a>
+      </div>
+      </div>
+      <div class="hq3-col">
+      <address class="hq-addr"><b>Find us</b>Shop 20, Meera Co-op Hsg, New Link Road<br>Oshiwara, Andheri West, Mumbai 400053</address>
+      <p class="hq-rule">21+ only <span aria-hidden="true">&#9760;</span> Open 6 days a week</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section class="gal gal-ticker" id="gallery" aria-labelledby="gal-h" data-gallery="ticker">
+  <div class="gt-wall"></div>
+  <div class="gt-over">
+    <p class="gal-kick">Inside the taproom</p>
+    <h2 class="gal-h" id="gal-h">Painted floor to ceiling</h2>
+    <p class="gal-hint">Tap a photo to see it big</p>
+  </div>
+  <dialog class="glb" aria-label="Taproom photos">
+    <button class="glb-x" type="button" data-glb-close aria-label="Close">&times;</button>
+    <button class="glb-nav glb-prev" type="button" data-glb-step="-1" aria-label="Previous photo">&larr;</button>
+    <figure class="glb-fig"><img class="glb-img" alt=""><figcaption class="glb-cap"></figcaption></figure>
+    <button class="glb-nav glb-next" type="button" data-glb-step="1" aria-label="Next photo">&rarr;</button>
+  </dialog>
+</section>
+
+
+<section class="rvn" id="note" aria-labelledby="rvf-h">
+  <div class="wrap">
+    <div class="rvf-wrap">
+      <form class="rvf" data-review-form novalidate aria-labelledby="rvf-h">
+        <span class="rvf-tape" aria-hidden="true"></span>
+        <h3 class="rvf-h" id="rvf-h">Leave us a note</h3>
+        <p class="rvf-sub">Been to the taproom? Tell us how it was.</p>
+        <p class="rvf-err" data-rvf-err role="alert" hidden></p>
+        <div class="rvf-row">
+          <label class="rvf-field"><span>First name</span><input name="name" autocomplete="given-name" maxlength="30" required></label>
+          <fieldset class="rvf-rate">
+            <legend>Rate us in pints</legend>
+            <div class="rvf-pints">
+              <input type="radio" name="rating" id="rv5" value="5"><label for="rv5" title="5 pints"><span class="sr">5 pints</span></label>
+              <input type="radio" name="rating" id="rv4" value="4"><label for="rv4" title="4 pints"><span class="sr">4 pints</span></label>
+              <input type="radio" name="rating" id="rv3" value="3"><label for="rv3" title="3 pints"><span class="sr">3 pints</span></label>
+              <input type="radio" name="rating" id="rv2" value="2"><label for="rv2" title="2 pints"><span class="sr">2 pints</span></label>
+              <input type="radio" name="rating" id="rv1" value="1"><label for="rv1" title="1 pint"><span class="sr">1 pint</span></label>
+            </div>
+          </fieldset>
+        </div>
+        <label class="rvf-field"><span>Your review</span><textarea name="review" rows="3" maxlength="400" placeholder="The beer, the food, the walls, the people…" required aria-describedby="rvf-count"></textarea></label>
+        <p class="rvf-count" id="rvf-count" data-rvf-count>0 / 400</p>
+        <label class="rvf-check"><input type="checkbox" name="attachTag" data-rvf-tag disabled><span>Attach the tag I just sprayed <small data-rvf-tag-hint>(spray something on the wall below first)</small></span></label>
+        <label class="rvf-check"><input type="checkbox" name="consent" value="yes"><span>OK to show this on the website with my first name</span></label>
+        <input class="rvf-hp" name="bot-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn btn-solid rb-static rvf-send" type="submit">Pin my note</button>
+        <p class="rvf-small">We read every note. Nothing goes on the site unless you tick the box above and we check it first.</p>
+      </form>
+      <div class="rvf rvf-done" data-rvf-done hidden tabindex="-1">
+        <span class="rvf-tape" aria-hidden="true"></span>
+        <p class="rvf-h">Pinned. Cheers!</p>
+        <p class="rvf-sub" data-rvf-done-text></p>
+        <p class="rvf-local" data-rvf-local hidden>Local preview: not sent. On the live Netlify site this goes straight to the taproom.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tagwall" id="tag" aria-labelledby="tag-h">
+  <div class="wrap tagwall-head">
+    <p class="tagwall-kick">Your turn</p>
+    <h2 class="tagwall-h" id="tag-h">Leave your tag</h2>
+    <p class="tagwall-sub">Grab a can and spray the wall. Drag with your mouse or finger, then save it and tag us.</p>
+  </div>
+  <div class="wrap">
+    <div class="tagwall-board">
+      <canvas class="tagwall-canvas" aria-label="Spray paint wall. Drag to paint." data-tagwall></canvas>
+      <p class="tagwall-hint" aria-hidden="true">Spray here</p>
+      <div class="tagwall-tools" role="group" aria-label="Spray colours and tools">
+        <button class="tw-can is-on" style="--c:#ffd400" data-color="#ffd400" aria-label="Yellow" aria-pressed="true" type="button"></button>
+        <button class="tw-can" style="--c:#ff2e88" data-color="#ff2e88" aria-label="Pink" aria-pressed="false" type="button"></button>
+        <button class="tw-can" style="--c:#29e3ff" data-color="#29e3ff" aria-label="Cyan" aria-pressed="false" type="button"></button>
+        <button class="tw-can" style="--c:#f5f1e8" data-color="#f5f1e8" aria-label="White" aria-pressed="false" type="button"></button>
+        <span class="tw-sep" aria-hidden="true"></span>
+        <button class="tw-tool" type="button" data-tw-clear>Buff it</button>
+        <button class="tw-tool tw-save" type="button" data-tw-save>Save &darr;</button>
+      </div>
+    </div>
+    <div class="tw-send">
+      <button class="btn btn-solid" type="button" data-tw-send>Send your tag to us</button>
+      <p class="tw-consent">Sending it means you're happy for us to show your tag and first name on this website. We'll ask before using anything you write about us.</p>
+    </div>
+    <a class="tagwall-ig" href="https://www.instagram.com/rollingmillsbrewery/" target="_blank" rel="noopener"><span>Or post it and tag us</span> @rollingmillsbrewery</a>
+  </div>
+</section>
+
+<!-- Netlify Forms reads this hidden copy at deploy time; the note form above posts the same fields with JavaScript -->
+<form name="guest-review" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" hidden>
+  <input name="bot-field"><input name="name"><input name="rating"><textarea name="review"></textarea><input name="consent"><input type="file" name="tag"><input name="createdAt">
+</form>
+
+<section class="rv" id="reviews" aria-labelledby="rv-h" data-reviews hidden>
+  <div class="wrap">
+    <div class="rv-head">
+      <p class="rv-kick">Signed by our guests</p>
+      <h2 class="rv-h" id="rv-h">Left their <span>mark</span></h2>
+      <p class="rv-sub">What people said about us, and the tag each of them sprayed on our wall.</p>
+    </div>
+    <div class="rv-slider" role="region" aria-roledescription="carousel" aria-label="Guest reviews">
+      <button class="rv-arrow rv-prev" type="button" data-rv-step="-1" aria-label="Previous reviews">&larr;</button>
+      <div class="rv-track" data-rv-grid tabindex="0" aria-label="Reviews, scroll sideways"></div>
+      <button class="rv-arrow rv-next" type="button" data-rv-step="1" aria-label="Next reviews">&rarr;</button>
+    </div>
+  </div>
+</section>
+

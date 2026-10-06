@@ -1,0 +1,36 @@
+<div class="menu-bg" aria-hidden="true"></div>
+<section class="page-head" data-accent="yellow">
+  <div class="wrap">
+    <p class="kicker">Eat, drink, repeat</p>
+    <h1 class="display h1">The <em class="spray">menu</em></h1>
+    <p class="lead">Beer from our brewhouse, food made for it, and something for the friend who isn't drinking.</p>
+  </div>
+</section>
+
+<section class="section section-tight" data-accent="yellow" aria-label="Menu">
+  <div class="wrap">
+    <div class="menu-bar">
+      <div class="tabs" role="tablist" aria-label="Menu sections">
+        <button class="tab" role="tab" id="tab-beer" aria-controls="panel-beer" aria-selected="true">Beer</button>
+        <button class="tab" role="tab" id="tab-food" aria-controls="panel-food" aria-selected="false" tabindex="-1">Food</button>
+        <button class="tab" role="tab" id="tab-soft" aria-controls="panel-soft" aria-selected="false" tabindex="-1">Non-alcoholic</button>
+      </div>
+      <label class="toggle veg-switch"><input type="checkbox" role="switch" data-veg-only><span class="vs-track" aria-hidden="true"><span class="vs-knob"><span class="diet diet-veg"></span></span></span><span>Veg only</span></label>
+    </div>
+    <div class="board">
+      <div role="tabpanel" id="panel-beer" aria-labelledby="tab-beer" tabindex="0"><h2 class="sr">Beer</h2><div class="menu-list" data-menu="beer"></div></div>
+      <div role="tabpanel" id="panel-food" aria-labelledby="tab-food" tabindex="0" hidden><h2 class="sr">Food</h2>
+        <p class="sample-note">Sample dishes, shown as illustrations. The real menu, photos and prices are coming from the taproom.</p>
+        <div class="menu-list" data-menu="food"></div>
+      </div>
+      <div role="tabpanel" id="panel-soft" aria-labelledby="tab-soft" tabindex="0" hidden><h2 class="sr">Non-alcoholic</h2>
+        <p class="sample-note">Sample drinks. The real list is coming from the taproom.</p>
+        <div class="menu-list" data-menu="soft"></div>
+      </div>
+    </div>
+    <div class="cta-row cta-end">
+      <a class="btn btn-solid" href="book.html" data-track="Book a table">Book a table</a>
+      <a class="btn btn-line rb-static" href="https://www.airmenus.in/rollingmills/order" target="_blank" rel="noopener" data-track="Order beer">Order beer<span class="sr"> (opens AirMenus)</span></a>
+    </div>
+  </div>
+</section>

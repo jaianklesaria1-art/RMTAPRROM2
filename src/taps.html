@@ -1,0 +1,40 @@
+<section class="shop" aria-labelledby="shop-h">
+  <img class="shop-bg" src="assets/photos/hq-warehouse.webp" alt="" width="1536" height="1024">
+  <div class="shop-kegs" aria-hidden="true"><img src="assets/photos/hq-kegs-cut.webp" alt="" width="899" height="900"><span class="shop-kegs-shadow"></span></div>
+  <div class="wrap shop-wrap">
+    <aside class="shop-side" aria-label="Filter by style">
+      <h2 class="shop-side-h">Styles</h2>
+      <div class="shop-cats" role="group" aria-label="Filter by style" data-filters></div>
+    </aside>
+    <div class="shop-main">
+      <div class="shop-head">
+        <h1 id="shop-h" class="shop-title">On tap now</h1>
+        <span class="shop-count" data-shop-count>9 beers</span>
+      </div>
+      <p class="shop-updated" data-updated></p>
+      <p class="sr" aria-live="polite" data-filter-status></p>
+      <div class="shop-grid" data-beers="all"></div>
+      <div class="shop-promo shop-promo-end">
+        <div class="shop-promo-copy">
+          <h2 class="shop-promo-h">Take a litre home</h2>
+          <p>Every beer is brewed at our Kandivali brewhouse. Order your favourites by the litre on AirMenus.</p>
+          <a class="btn btn-solid" href="https://www.airmenus.in/rollingmills/order" target="_blank" rel="noopener" data-track="Order beer">Order on AirMenus<span class="sr"> (opens AirMenus)</span></a>
+        </div>
+      </div>
+      <p class="shop-note">Prices are AirMenus take-home prices. Ask at the bar for glass sizes and prices.</p>
+    </div>
+  </div>
+</section>
+
+<div class="drawer" id="beer-drawer" hidden>
+  <div class="drawer-scrim" data-close></div>
+  <div class="drawer-sheet" role="dialog" aria-modal="true" aria-labelledby="d-name">
+    <button class="icon-btn drawer-close" type="button" data-close aria-label="Close">✕</button>
+    <div class="d3-stage">
+      <canvas class="d3-canvas" aria-hidden="true"></canvas>
+      <img class="d3-fallback" alt="" hidden>
+      <p class="d3-hint" aria-hidden="true">Drag to turn</p>
+    </div>
+    <div data-drawer-body></div>
+  </div>
+</div>
