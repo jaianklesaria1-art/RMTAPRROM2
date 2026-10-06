@@ -788,6 +788,6 @@ body.can-docks-beer .won-card:first-child .won-icon { visibility: hidden; }
 @media (max-width: 760px) {
   .won-icon.won-icon-burger { left: auto; right: 18px; transform: translate(28%, -46%) rotate(6deg); }
   .won-card:hover .won-icon.won-icon-burger { transform: translate(28%, -54%) rotate(12deg) scale(1.06); }
-  .won-icon.won-icon-r { right: auto; left: 18px; transform: translate(-28%, -46%) rotate(-6deg); }
-  .won-card:hover .won-icon.won-icon-r { transform: translate(-28%, -54%) rotate(-12deg) scale(1.06); }
+  .won-icon.won-icon-r { right: auto; left: 18px; transform: translate(-28%, -46%) rotate(-6deg) scaleX(-1); }   /* mirrored so the speaker faces right */
+  .won-card:hover .won-icon.won-icon-r { transform: translate(-28%, -54%) rotate(-12deg) scale(-1.06, 1.06); }
 }
