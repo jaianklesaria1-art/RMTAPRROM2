@@ -18,6 +18,7 @@
 
     function layout() {
       const W = host.clientWidth; if (!W) return;
+      if (host.dataset.asciiFit !== undefined) return layoutFit(W);
       const small = W < 640;
       const text = small ? lines : [lines.join(" ")];
       charH = +host.dataset.asciiSize || (small ? 6 : 8);     // css px per character row (data-ascii-size overrides)
@@ -34,6 +35,31 @@
       sc.font = `400 ${fs}px Anton, Impact, sans-serif`; sc.fillStyle = "#fff"; sc.textBaseline = "top"; sc.textAlign = "center";
       text.forEach((t, i) => sc.fillText(t, src.width / 2, padY + i * lh));
       rows = Math.max(6, Math.round(cols * charW / (src.width / src.height) / charH));
+      smp.width = cols; smp.height = rows;
+      render(performance.now());
+    }
+
+    /* fit mode (footer wordmark): the ASCII is laid exactly over the host's own text box, same font and size,
+       so it drops into an existing layout. Character size scales with the font size. */
+    function layoutFit(W) {
+      const H = host.clientHeight; if (!H) return;
+      const fpx = parseFloat(getComputedStyle(host).fontSize) || 100;
+      charH = Math.max(2, Math.min(9, Math.round(fpx / 22)));   // ~20 rows of characters per line of text
+      pre.style.fontSize = charH + "px"; pre.style.lineHeight = charH + "px";
+      const probe = document.createElement("span"); probe.textContent = "M".repeat(20); pre.appendChild(probe);
+      charW = probe.getBoundingClientRect().width / 20; probe.remove();
+      cols = Math.max(8, Math.floor(W / charW)); rows = Math.max(4, Math.floor(H / charH));
+      const k = 400 / fpx, fs = fpx * k;
+      src.width = Math.ceil(W * k); src.height = Math.ceil(H * k);
+      sc.clearRect(0, 0, src.width, src.height);
+      sc.font = `400 ${fs}px Anton, Impact, sans-serif`; sc.fillStyle = "#fff"; sc.textAlign = "center"; sc.textBaseline = "alphabetic";
+      // centre the real ink (cap height), not the em box: the wordmark's line-height is tighter than the font
+      const word = lines.join(" "), m = sc.measureText(word);
+      const asc = m.actualBoundingBoxAscent || fs * .72, desc = m.actualBoundingBoxDescent || 0;
+      const inkW = (m.actualBoundingBoxLeft || m.width / 2) + (m.actualBoundingBoxRight || m.width / 2);
+      if (inkW > src.width * .98) { const f = src.width * .98 / inkW; sc.font = `400 ${fs * f}px Anton, Impact, sans-serif`; }
+      const m2 = sc.measureText(word), a2 = m2.actualBoundingBoxAscent || asc, d2 = m2.actualBoundingBoxDescent || desc;
+      sc.fillText(word, src.width / 2, (src.height + a2 - d2) / 2);
       smp.width = cols; smp.height = rows;
       render(performance.now());
     }

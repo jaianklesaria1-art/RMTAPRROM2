@@ -153,10 +153,10 @@ def page(pid, title, desc, navkey, body):
 
 <footer class="site-footer ft2">
   <div class="ft2-mark" role="img" aria-label="Rolling Mills">
-    <span class="ft2-word">Rolling</span>
+    <span class="ft2-word" data-ascii="ROLLING" data-ascii-fit aria-hidden="true">Rolling</span>
     <img class="ft2-badge" src="assets/r-badge.svg" alt="" width="200" height="200" loading="lazy">
     <span class="ft2-canslot" aria-hidden="true"></span>
-    <span class="ft2-word">Mills</span>
+    <span class="ft2-word" data-ascii="MILLS" data-ascii-fit aria-hidden="true">Mills</span>
   </div>
   <div class="wrap ft2-cols">
     <div class="ft2-col">
@@ -211,6 +211,7 @@ def page(pid, title, desc, navkey, body):
 
 <script src="js/data.js"></script>
 <script src="js/app.js"></script>
+<script src="js/ascii-text.js"></script>
 {extra_js}
 </body>
 </html>
