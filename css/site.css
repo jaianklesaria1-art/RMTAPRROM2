@@ -1272,7 +1272,3 @@ html.menu-open { overflow: hidden; }
 @media (max-width: 760px) {
   .mnav-sub a { font: 400 1.15rem/1.2 var(--display); text-transform: uppercase; letter-spacing: .06em; }
 }
-
-/* footer wordmark in ASCII (React Bits ASCIIText port, js/ascii-text.js fit mode), desktop and phones (Jai) */
-.ft2-word[data-ascii] { position: relative; display: inline-block; color: transparent; cursor: crosshair; }
-.site-footer .ft2-word .ascii-pre { position: absolute; inset: 0; margin: 0; width: auto; max-width: none; overflow: hidden; color: #141414; font-weight: 700; pointer-events: none; }
