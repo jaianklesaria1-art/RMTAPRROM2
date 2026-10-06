@@ -131,17 +131,18 @@ def page(pid, title, desc, navkey, body):
     <ul class="mnav-main">
       <li><a href="on-tap.html">On tap</a></li>
       <li><a href="menu.html">Menu</a></li>
-      <li><a href="book.html">Book a table</a></li>
       <li><a href="parties.html">Private parties</a></li>
       <li><a href="story.html">Our story</a></li>
     </ul>
     <ul class="mnav-sub">
-      <li><a href="{ORDER}" target="_blank" rel="noopener" data-track="Order beer">Order on AirMenus</a></li>
       <li><a href="tel:+917400407711" data-track="Call">Call +91 74004 07711</a></li>
       <li><a href="https://www.google.com/maps/search/?api=1&amp;query=19.15123,72.8317709" target="_blank" rel="noopener" data-track="Directions">Get directions</a></li>
       <li><a href="https://www.instagram.com/rollingmillsbrewery/" target="_blank" rel="noopener">Instagram</a></li>
     </ul>
-    <a class="mnav-cta" href="book.html" data-track="Book a table">Book a table</a>
+    <div class="mnav-ctas">
+      <a class="mnav-cta" href="book.html" data-track="Book a table">Book a table</a>
+      <a class="mnav-cta mnav-cta-alt" href="{ORDER}" target="_blank" rel="noopener" data-track="Order beer">Order beer</a>
+    </div>
   </nav>
 </div>
 

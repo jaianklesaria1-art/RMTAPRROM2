@@ -20,7 +20,7 @@
 .scroll-cue i { width: 1px; height: 28px; background: linear-gradient(var(--chalk), transparent); animation: cue 1.8s var(--ease) infinite; }
 @keyframes cue { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
 @media (max-width: 860px) {
-  .vhero { height: calc(100svh - 60px); }
+  .vhero { height: 100svh; }   /* phones: the hero fills the screen (Jai) */
   .vhero-pause { bottom: auto; top: 76px; }
   .scroll-cue { display: none; }
 }
@@ -160,7 +160,7 @@
 @media (max-width: 860px) { .vhero-tag { top: 132px; width: 86vw; } }
 @media (prefers-reduced-motion: reduce) { .vhero-tag.on img { animation: none; opacity: 1; transform: none; } }
 
-/* ===== hero end line v2: wet spray + drips (Jai) ===== */
+/* ===== hero end line v2: wet spray (Jai) ===== */
 .vhero-tag { display: grid; gap: .1em; }
 .vhero-tag .tl { position: relative; }
 .vhero-tag .tl:first-child { width: 100%; }
@@ -169,16 +169,6 @@
 .vhero-tag .tl:last-child img { animation-delay: .4s; }
 .vhero-tag.on .tl:last-child img { animation-delay: .4s; }
 .vhero-tag.on .tl:first-child img { animation-delay: 0s; }
-/* a drip = a clipped box; the paint inside slides down, so only transform animates (smooth over video) */
-.drip { position: absolute; width: 1.9%; height: var(--len); margin-left: -.95%; overflow: hidden; pointer-events: none; }
-.drip i { position: absolute; inset: 0; transform: translate3d(0, -101%, 0); will-change: transform; }
-.drip i::before { content: ""; position: absolute; left: 32%; right: 32%; top: 0; bottom: 18%;
-  background: linear-gradient(90deg, rgba(225,222,235,.95), #fff 45%, rgba(232,248,255,.95)); border-radius: 0 0 6px 6px; }
-.drip i::after { content: ""; position: absolute; left: 14%; right: 14%; bottom: 2%; aspect-ratio: 1 / 1.25; border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
-  background: radial-gradient(circle at 35% 35%, #fff, #e9e6f2 60%, #cfcbe0); box-shadow: 0 2px 2px rgba(0,0,0,.35); }
-.vhero-tag.on .drip i { animation: drip var(--t) var(--d) cubic-bezier(.55, 0, .75, .5) forwards; }
-@keyframes drip { to { transform: translate3d(0, 0, 0); } }
-@media (prefers-reduced-motion: reduce) { .vhero-tag.on .drip i { animation: none; transform: none; } }
 
 /* ===== home: navigation bar hidden over the video, slides in once the visitor scrolls ===== */
 body[data-page="home"] .site-header { position: fixed; left: 0; right: 0; top: 0; transform: translate3d(0, -105%, 0); transition: transform .45s cubic-bezier(.2,.8,.2,1); }
@@ -791,3 +781,5 @@ body.can-docks-beer .won-card:first-child .won-icon { visibility: hidden; }
 /* Beats card: a 3D speaker render instead of the drawn icon (Jai, 2026-10-07) */
 .won-icon-3d { width: 118px !important; height: auto; filter: drop-shadow(0 16px 20px rgba(0,0,0,.55)); }
 @media (max-width: 760px) { .won-icon-3d { width: 96px !important; } }
+.won-icon-burger { width: 132px !important; }
+@media (max-width: 760px) { .won-icon-burger { width: 108px !important; } }

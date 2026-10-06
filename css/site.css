@@ -1208,11 +1208,14 @@ body[data-page="parties"] #main, body[data-page="404"] #main { padding-top: 0; }
 .mnav-main a { display: inline-block; padding: 4px 8px; font: italic 400 clamp(2.2rem, 11vw, 3.2rem)/1 var(--display); text-transform: uppercase; letter-spacing: .01em; color: #141414; text-decoration: none; transform: skewX(-6deg); }
 .mnav-sub a { display: inline-block; padding: 7px 8px; font: 600 1.05rem var(--ui); color: #141414; text-decoration: none; }
 .mnav-cta { display: block; width: min(100%, 360px); padding: 17px 20px; border-radius: 10px; background: #141414; color: var(--yellow); font: 400 1.25rem/1 var(--display); text-transform: uppercase; letter-spacing: .06em; text-decoration: none; }
+.mnav-ctas { display: grid; gap: 10px; width: min(100%, 360px); }
+.mnav-ctas .mnav-cta { width: 100%; }
+.mnav-cta-alt { background: transparent; color: #141414; box-shadow: inset 0 0 0 2px #141414; }
 .mnav a:focus-visible { outline: 3px solid #141414; outline-offset: 3px; }
-.mnav li, .mnav-cta { opacity: 0; transform: translateY(-14px); transition: opacity .35s, transform .45s cubic-bezier(.2,1.2,.4,1); }
-.mnav.is-open li, .mnav.is-open .mnav-cta { opacity: 1; transform: none; }
+.mnav li, .mnav-ctas { opacity: 0; transform: translateY(-14px); transition: opacity .35s, transform .45s cubic-bezier(.2,1.2,.4,1); }
+.mnav.is-open li, .mnav.is-open .mnav-ctas { opacity: 1; transform: none; }
 .mnav.is-open li:nth-child(1) { transition-delay: .18s; } .mnav.is-open li:nth-child(2) { transition-delay: .23s; } .mnav.is-open li:nth-child(3) { transition-delay: .28s; }
-.mnav.is-open li:nth-child(4) { transition-delay: .33s; } .mnav.is-open li:nth-child(5) { transition-delay: .38s; } .mnav.is-open .mnav-cta { transition-delay: .45s; }
+.mnav.is-open li:nth-child(4) { transition-delay: .33s; } .mnav.is-open li:nth-child(5) { transition-delay: .38s; } .mnav.is-open .mnav-ctas { transition-delay: .45s; }
 html.menu-open { overflow: hidden; }
 /* morphing hamburger: three lines turn into an X */
 .mb-lines { position: relative; display: block; width: 20px; height: 14px; }
@@ -1236,7 +1239,8 @@ html.menu-open { overflow: hidden; }
   .pill-nav .hd-actions .btn { min-height: 0; }
   .pill-nav .menu-btn { display: grid !important; place-items: center; width: 48px; height: 48px; border-radius: 14px; border: 0; background: #fff; color: #141414; box-shadow: 0 6px 16px rgba(0,0,0,.25); }
   html.menu-open .pill-nav .menu-btn { background: #141414; color: var(--yellow); }
-  html.menu-open .pill-nav .nav-book { visibility: hidden; }
+  /* phones: Book a table lives in the menu, not the bar (Jai) */
+  .pill-nav .nav-book { display: none !important; }
   /* smaller buttons on phones */
   .rb { --h: 40px; }
   .rb-face { padding: 0 16px; font-size: .86rem; }
@@ -1254,7 +1258,7 @@ html.menu-open { overflow: hidden; }
   .ft2-hours > div, .ft2-card dl > div { flex-wrap: wrap; gap: 4px 10px; min-width: 0; }
   .ft2-hours dd, .ft2-hours dt { min-width: 0; overflow-wrap: anywhere; }
 }
-@media (prefers-reduced-motion: reduce) { .mnav { transition: none; } .mnav li, .mnav-cta { transition: none; opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .mnav { transition: none; } .mnav li, .mnav-ctas { transition: none; opacity: 1; transform: none; } }
 @media (max-width: 760px) {
   .pill-nav .brand { display: inline-flex !important; flex-direction: row; align-items: center; white-space: nowrap; }
 }
