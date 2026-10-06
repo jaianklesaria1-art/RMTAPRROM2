@@ -1267,3 +1267,8 @@ html.menu-open { overflow: hidden; }
   .pill-nav .hd-in > .brand::after { color: #141414 !important; }
 }
 @media (max-width: 760px) { .pill-nav .hd-in > .brand { width: auto !important; min-width: 0 !important; max-width: none !important; } }
+
+/* phones: the small menu links (call, directions, Instagram) in the display face, like the menu buttons (Jai) */
+@media (max-width: 760px) {
+  .mnav-sub a { font: 400 1.15rem/1.2 var(--display); text-transform: uppercase; letter-spacing: .06em; }
+}

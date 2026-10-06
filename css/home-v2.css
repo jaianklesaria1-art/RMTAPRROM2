@@ -783,3 +783,11 @@ body.can-docks-beer .won-card:first-child .won-icon { visibility: hidden; }
 @media (max-width: 760px) { .won-icon-3d { width: 96px !important; } }
 .won-icon-burger { width: 132px !important; }
 @media (max-width: 760px) { .won-icon-burger { width: 108px !important; } }
+
+/* phones: What's on icons swap sides, burger on the right and speaker on the left (Jai) */
+@media (max-width: 760px) {
+  .won-icon.won-icon-burger { left: auto; right: 18px; transform: translate(28%, -46%) rotate(6deg); }
+  .won-card:hover .won-icon.won-icon-burger { transform: translate(28%, -54%) rotate(12deg) scale(1.06); }
+  .won-icon.won-icon-r { right: auto; left: 18px; transform: translate(-28%, -46%) rotate(-6deg); }
+  .won-card:hover .won-icon.won-icon-r { transform: translate(-28%, -54%) rotate(-12deg) scale(1.06); }
+}
