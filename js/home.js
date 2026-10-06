@@ -432,12 +432,12 @@
             won:   m ? { x: .87, dy: .1,  s: .12 } : { x: .1,  dy: .3,  s: .27 },
             gal:   m ? { x: .84, dy: .22, s: .1 } : { x: .9, dy: .26, s: .2 },    // gallery: beside the heading, over the photo wall
             hq:    m ? { x: .86, dy: 1.0, s: .1 } : { x: .87, dy: .52, s: .22 },  // right side, above the kegs (not in the middle)
-            note:  m ? { x: .13, dy: .06, s: .085 } : { x: .14, dy: .5, s: .27 },   // v2: Leave us a note, on the left beside the paper note
+            note:  m ? { x: .86, dy: .025, s: .075 } : { x: .14, dy: .5, s: .27 },   // phones: tucked top-right above the note, not over the form   // v2: Leave us a note, on the left beside the paper note
             tag:   m ? { x: .8, dy: .5, s: .11 } : { x: .82, dy: .55, s: .24 }     // Leave your tag: on the wall, riding down with you like a can left on the floor
           }[k];
           let y = t + f.dy * H;
           // tag: the can rides the spray wall only, not down over the note form
-          if (k === "won" || k === "tag" || k === "note") { const r = rect(k === "tag" && tagBoard || el), sz = f.s * H; y = Math.min(Math.max(y, H * (k === "won" ? (m ? .18 : .32) : k === "note" ? (m ? .14 : .5) : (m ? .55 : .55))), r.bottom - sz * .75); }   // rides down with you through the section   // stays with you through the whole HQ section
+          if (k === "won" || k === "tag" || (k === "note" && !m)) { const r = rect(k === "tag" && tagBoard || el), sz = f.s * H; y = Math.min(Math.max(y, H * (k === "won" ? (m ? .18 : .32) : k === "note" ? (m ? .14 : .5) : (m ? .55 : .55))), r.bottom - sz * .75); }   // rides down with you through the section   // stays with you through the whole HQ section
           return { x: f.x * W, y, s: f.s * H, rx: .05, ry: 0, rz: -.09, idle: 1 };
         };
         const poseStage = () => { const r = rect(hold); return { x: r.left + r.width / 2, y: r.top + r.height / 2, s: r.height * .62,
