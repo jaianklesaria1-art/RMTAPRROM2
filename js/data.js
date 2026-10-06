@@ -32,6 +32,9 @@ window.RM_DATA = {
   // "demo":     shows the full "Table booked!" flow for presentations but SENDS NOTHING (a demo banner says so). Never ship this.
   booking: { mode: "netlify", endpoint: "" },
 
+  // where the rolling can ends up: "beer-card" (lands on the What's on Beer card) or "fridge" (dives into the Taproom fridge)
+  canRoute: "fridge",
+
   // ---------- hero video (Google Flow) ----------
   // Set to true once hero-intro-*.mp4 / hero-loop-*.mp4 are in assets/video (see ../flow-video/FLOW-BRIEF.md).
   // Until then the hero shows the still end frame.

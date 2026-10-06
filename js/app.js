@@ -547,6 +547,13 @@
     const usePhone = mode !== "whatsapp";
     const phoneField = $("[data-phone-field]"); if (phoneField) { phoneField.hidden = !usePhone; f.phone.required = usePhone; }
     $$("[data-step-wa]").forEach(x => x.hidden = usePhone); $$("[data-step-api]").forEach(x => x.hidden = !usePhone);
+    // the page copy follows the delivery mode (it no longer mentions WhatsApp unless bookings really go there)
+    if (mode === "whatsapp") {
+      const set = (q, t) => { const el = $(q); if (el) el.textContent = t; };
+      set("[data-bk-lead]", "Fill in your ticket, tear off the stub, and it lands with us on WhatsApp. We confirm your table there.");
+      set("[data-bk-hint]", "Next you'll get a ticket. Tear off the stub and WhatsApp opens with everything filled in.");
+      const sb = $("[data-bk-submit]"); if (sb) { const faces = $$(".rb-face", sb); faces.length ? faces.forEach(f => f.textContent = "Send request on WhatsApp") : (sb.textContent = "Send request on WhatsApp"); }
+    }
     const done = $("[data-book-done]");
     let message = "", ticket = null, ticketNo = "", rows = [], booking = null, sendPromise = null;
     const waLink = () => `https://wa.me/${P.whatsapp}?text=${encodeURIComponent(message)}`;

@@ -84,6 +84,17 @@
     if (window.RM_READY) load("intro"); else document.addEventListener("rm:ready", () => load("intro"), { once: true });
   })();
 
+  /* ---------- Lenis smooth scrolling (the awwwards-style "scrubbed" feel). Not on touch (native momentum is better there)
+     and not with reduced motion. Paused while a dialog/overlay is open. ---------- */
+  (function smoothScroll() {
+    if (reduce || !window.Lenis) return;
+    const lenis = new Lenis({ lerp: .085, smoothWheel: true, anchors: { offset: -20 } });
+    window.RM_LENIS = lenis;
+    const raf = t => { lenis.raf(t); requestAnimationFrame(raf); }; requestAnimationFrame(raf);
+    new MutationObserver(() => { document.body.classList.contains("has-overlay") ? lenis.stop() : lenis.start(); })
+      .observe(document.body, { attributes: true, attributeFilter: ["class"] });
+  })();
+
   /* ---------- navigation bar: hidden over the hero video, shown as soon as the visitor scrolls ---------- */
   (function navOnScroll() {
     // only touch the body class when the state flips (a class change on <body> restyles the whole page)
@@ -429,7 +440,7 @@
           const el = { about: aboutSec, won: wonSec, gal: galSec, hq: hqSec, note: noteSec, tag: tagSec }[k], t = secTop(el);
           const f = {
             about: m ? { x: .82, dy: .88, s: .14 } : { x: .84, dy: .5,  s: .4 },
-            won:   m ? { x: .87, dy: .1,  s: .12 } : { x: .1,  dy: .3,  s: .27 },
+            won:   m ? { x: .9, dy: .2, s: .085 } : W <= 960 ? { x: .9, dy: .07, s: .12 } : { x: .1,  dy: .3,  s: .27 },   // phones: below the heading; tablets: small, beside the heading
             gal:   m ? { x: .84, dy: .22, s: .1 } : { x: .9, dy: .26, s: .2 },    // gallery: beside the heading, over the photo wall
             hq:    m ? { x: .86, dy: 1.0, s: .1 } : { x: .87, dy: .52, s: .22 },  // right side, above the kegs (not in the middle)
             note:  m ? { x: .86, dy: .025, s: .075 } : { x: .14, dy: .5, s: .27 },   // phones: tucked top-right above the note, not over the form   // v2: Leave us a note, on the left beside the paper note
@@ -437,40 +448,50 @@
           }[k];
           let y = t + f.dy * H;
           // tag: the can rides the spray wall only, not down over the note form
-          if (k === "won" || k === "tag" || (k === "note" && !m)) { const r = rect(k === "tag" && tagBoard || el), sz = f.s * H; y = Math.min(Math.max(y, H * (k === "won" ? (m ? .18 : .32) : k === "note" ? (m ? .14 : .5) : (m ? .55 : .55))), r.bottom - sz * .75); }   // rides down with you through the section   // stays with you through the whole HQ section
-          return { x: f.x * W, y, s: f.s * H, rx: .05, ry: 0, rz: -.09, idle: 1 };
+          if ((k === "won" && (m || W > 960)) || k === "tag" || (k === "note" && !m)) { const r = rect(k === "tag" && tagBoard || el), sz = f.s * H; y = Math.min(Math.max(y, H * (k === "won" ? (m ? .18 : .32) : k === "note" ? (m ? .14 : .5) : (m ? .55 : .55))), r.bottom - sz * .75); }   // rides down with you through the section   // stays with you through the whole HQ section
+          const tab = !m && W <= 960 && k !== "won";   // tablets: a smaller can, so it doesn't sit on the content
+          return { x: (tab ? Math.min(f.x, .9) : f.x) * W, y, s: f.s * H * (tab ? .6 : 1), rx: .05, ry: 0, rz: -.09, idle: 1 };
         };
         const poseStage = () => { const r = rect(hold); return { x: r.left + r.width / 2, y: r.top + r.height / 2, s: r.height * .62,
           rx: rig.rotation.x, ry: rig.rotation.y + can.rotation.y, rz: rig.rotation.z, idle: 0, stage: 1 }; };
         const poseFoot = () => { if (!slot) return poseFixed("hq"); const sr = rect(slot), wr = rect(slot.parentElement);
           return { x: sr.left + sr.width / 2, y: wr.top + wr.height / 2, s: wr.height * .95, rx: .05, ry: 0, rz: .18, idle: 0 }; };
-        // timeline: [scrollY where this pose is fully in place, pose()]
+        /* ---------- route: scroll-scrubbed (the can is tied to the scroll position; Lenis smooths the scroll itself) ---------- */
+        const ROUTE = D.canRoute === "fridge" ? "fridge" : "beer-card";
+        const fridgeEl = $(".hq3-fridge"), beerCard = $(".won-card");
+        [fridgeEl, beerCard].forEach(el => { if (el) tracked.push(el); }); measure();
+        if (ROUTE === "beer-card" && beerCard) document.body.classList.add("can-docks-beer");   // the can replaces the Beer icon
+        const offRight = () => ({ x: W * 1.35, y: H * .42, s: (mob() ? .15 : .2) * H, rx: .05, ry: -Math.PI * 1.5, rz: .35, idle: 0 });
+        // v1 finish: in place of the beer icon (top-left corner of the Beer card, tilted like the other icons)
+        const poseCard = () => { const r = rect(beerCard), sz = mob() ? 104 : 124;
+          return { x: r.left + 46, y: r.top + 6, s: sz, rx: .05, ry: .35, rz: -.2, idle: 0, card: 1 }; };
+        // v2 finish: inside the fridge, small among the cans on a middle shelf
+        const poseFridge = () => { const r = rect(fridgeEl);
+          return { x: r.left + r.width * .5, y: r.top + r.height * .45, s: r.height * .12, rx: .02, ry: 0, rz: 0, idle: 0, fridge: 1 }; };
+        const sidePose = (k, x, dy, s) => { const el = { about: aboutSec, won: wonSec }[k], m = mob(), r = rect(el);
+          return { x: x * W, y: r.top + dy * H, s: s * H * (m ? .55 : 1), rx: .05, ry: 0, rz: -.09, idle: 1 }; };
         function stops() {
-          const C = document.documentElement.scrollHeight - H, at = el => Math.max(0, Math.min(C, top(el) - H * .33));
-          const list = [[H * .04, () => heroPose(NOW)]];
-          if (aboutSec) list.push([at(aboutSec), () => poseFixed("about")]);
-          list.push([Math.max(0, top(sec) - H * .3), poseStage]);                      // in place once the beer section is ~2/3 onscreen
-          if (wonSec) list.push([at(wonSec), () => poseFixed("won")]);
-          if (galSec) list.push([at(galSec), () => poseFixed("gal")]);
-          if (hqSec) list.push([at(hqSec), () => poseFixed("hq")]);
-          if (noteSec) list.push([at(noteSec), () => poseFixed("note")]);
-          if (tagSec) list.push([at(tagSec), () => poseFixed("tag")]);
-          if (slot) list.push([Math.max(0, Math.min(C, top(slot.parentElement) - H * .3)), poseFoot]);   // land while the wordmark is on screen
-          return list.sort((p, q) => p[0] - q[0]);   // v2: sections were reordered, so follow the page order
+          const C = document.documentElement.scrollHeight - H, at = el => Math.max(0, Math.min(C, top(el) - H * .33)), m = mob();
+          const stageAt = Math.max(0, top(sec) - H * .3);
+          const list = [];
+          if (ROUTE === "fridge") {
+            list.push([0, offRight]);                                                         // no can in the hero
+            list.push([stageAt, poseStage]);                                                  // flies in from the right onto the stage
+            if (aboutSec) list.push([at(aboutSec), () => sidePose("about", m ? .14 : .13, m ? .86 : .5, .36)]);   // left
+            if (wonSec) list.push([at(wonSec), () => sidePose("won", m ? .88 : .88, m ? .16 : .3, .26)]);         // right
+            if (fridgeEl) list.push([Math.max(0, Math.min(C, top(fridgeEl) + rect(fridgeEl).height * .45 - H * .5)), poseFridge]);  // left, into the fridge
+          } else {
+            list.push([H * .04, () => heroPose(NOW)]);
+            if (aboutSec) list.push([at(aboutSec), () => sidePose("about", m ? .82 : .84, m ? .88 : .5, .4)]);
+            list.push([stageAt, poseStage]);
+            if (beerCard) list.push([Math.max(0, Math.min(C, top(beerCard) - H * .45)), poseCard]);
+          }
+          return list.sort((p, q) => p[0] - q[0]);
         }
-        /* ---------- v2 motion (Jai): natural, flowing can ----------
-           1. Hero entrance: once the loader/age gate is done the can flies in from the right on a curved path,
-              spinning and wobbling, and settles at the bottom centre of the hero.
-           2. Travel between sections follows a bowed arc (not a straight line), spins in its direction of travel.
-           3. Everything is driven through a soft spring, so it accelerates and settles like a real object
-              (a touch of overshoot), and it leans into its own velocity (banks when moving sideways, pitches
-              when moving up/down). Resting poses float: a slow bob, sway and tilt. */
-        const cur = { x: 0, y: 0, s: 0, rx: 0, ry: 0, rz: 0 }, vel = { x: 0, y: 0, s: 0, rx: 0, ry: 0, rz: 0 };
-        const KEYS = ["x", "y", "s", "rx", "ry", "rz"];
-        let started = false, NOW = performance.now(), introStart = null;
+        let NOW = performance.now(), introStart = null;
         const startIntro = () => { if (introStart === null) introStart = performance.now() + 200; };
         if (window.RM_READY) startIntro(); else document.addEventListener("rm:ready", startIntro, { once: true });
-        const INTRO = 2.4;                                                   // seconds for the entrance
+        const INTRO = 2.4;
         const easeOut = t => 1 - Math.pow(1 - t, 3);
         const bez = (p0, p1, p2, p3, t) => { const u = 1 - t; return u * u * u * p0 + 3 * u * u * t * p1 + 3 * u * t * t * p2 + t * t * t * p3; };
         function heroPose(now) {
@@ -479,65 +500,69 @@
           const p = clamp01((now - introStart) / 1000 / INTRO);
           if (p >= 1) return { ...base, a: 1 };
           const e = easeOut(p), w = 1 - e;
-          // enters from the right edge, swoops up and over, dips past the centre, curls back in to rest
-          return {
-            x: bez(1.22 * W, .78 * W, .26 * W, base.x, e),
-            y: bez(.5 * H, .02 * H, .98 * H, base.y, e),
-            s: base.s * (.55 + .45 * e),
-            rx: base.rx + w * .7 * Math.sin(p * Math.PI * 1.6),
-            ry: base.ry - w * Math.PI * 4,                                     // two full spins, slowing as it lands
-            rz: base.rz + w * .95 * Math.sin(p * Math.PI * 2.4),               // wobble
-            idle: 0, intro: 1, a: clamp01(p * 8)
-          };
+          return { x: bez(1.22 * W, .78 * W, .26 * W, base.x, e), y: bez(.5 * H, .02 * H, .98 * H, base.y, e), s: base.s * (.55 + .45 * e),
+            rx: base.rx + w * .7 * Math.sin(p * Math.PI * 1.6), ry: base.ry - w * Math.PI * 4, rz: base.rz + w * .95 * Math.sin(p * Math.PI * 2.4),
+            idle: 0, intro: 1, a: clamp01(p * 8) };
         }
+        // where along the route are we: holding a pose, or travelling between two (with progress k)
         function target(Y) {
           const L = stops();
-          if (Y <= L[0][0]) return heroPose(NOW);
+          if (Y <= L[0][0]) return { ...L[0][1](), a: L[0][1]().a === 0 ? 0 : 1, seg: 0, k: 1 };
           for (let i = 1; i < L.length; i++) {
             const [y1, p1] = L[i], [y0, p0] = L[i - 1];
-            if (Y > y1 && i < L.length - 1 && Y < L[i + 1][0] - Math.min(H * .5, (L[i + 1][0] - y1) * .6)) return { ...p1(), a: 1 }; // holding
+            if (Y > y1 && i < L.length - 1 && Y < L[i + 1][0] - Math.min(H * .5, (L[i + 1][0] - y1) * .6)) return { ...p1(), a: 1, seg: i, k: 1 };
             if (Y <= y1) {
-              const travelStart = Math.max(y0, y1 - Math.min(H * .5, (y1 - y0) * .6));
-              if (Y < travelStart) return { ...p0(), a: 1 };                                                   // still holding the previous pose
+              const travelStart = Math.max(y0, y1 - Math.min(H * .55, (y1 - y0) * .65));
+              if (Y < travelStart) return { ...p0(), a: 1, seg: i - 1, k: 1 };
               const k = clamp01((Y - travelStart) / Math.max(1, y1 - travelStart)), e = easeIO(k);
               const A = p0(), B = p1(), arc = Math.sin(k * Math.PI);
               const dx = B.x - A.x, dy = B.y - A.y, dist = Math.hypot(dx, dy) || 1;
-              const side = i % 2 ? 1 : -1, bow = arc * Math.min(dist * .3, H * .24) * side;   // alternate the bow side: S-like flow
+              const side = i % 2 ? 1 : -1, bow = arc * Math.min(dist * .32, H * .26) * side;   // bowed path, alternating sides
               const dir = Math.sign(dx) || 1;
               return { x: lerp(A.x, B.x, e) - dy / dist * bow, y: lerp(A.y, B.y, e) + dx / dist * bow - arc * H * .04,
-                s: lerp(A.s, B.s, e) * (1 + arc * .12),
-                rx: lerp(A.rx, B.rx, e) + arc * .5, ry: lerp(A.ry, B.ry, e) + (1 - e) * Math.PI * 2 * dir,
-                rz: lerp(A.rz, B.rz, e) - arc * .7 * dir, idle: 0, a: 1 };
+                s: lerp(A.s, B.s, e) * (1 + arc * .14),
+                rx: lerp(A.rx, B.rx, e) + arc * .55, ry: lerp(A.ry, B.ry, e) + (1 - e) * Math.PI * 2 * dir,
+                rz: lerp(A.rz, B.rz, e) - arc * .75 * dir, idle: 0, a: 1, seg: i, k, into: B.fridge ? 1 : 0 };
             }
           }
-          return { ...L[L.length - 1][1](), a: 1 };
+          const last = L[L.length - 1];
+          const T = { ...last[1](), a: 1, seg: L.length - 1, k: 1 };
+          // v2: once the can is in the fridge it disappears into it as you keep scrolling
+          if (T.fridge) T.a = 1 - clamp01((Y - last[0]) / (H * .18));
+          return T;
         }
-        let lastT = 0, lastOp = "", drawn = null;   // null = never drawn yet (must draw the first frame)
+        const cur = { x: 0, y: 0, s: 0, rx: 0, ry: 0, rz: 0 }, vel = { x: 0, y: 0 };
+        const KEYS = ["x", "y", "s", "rx", "ry", "rz"];
+        let started = false, lastT = 0, lastOp = "", drawn = null, wasDocked = false, nudgeAt = -1, fridgeHit = false;
         function loop(now) {
           requestAnimationFrame(loop);
           if (document.hidden) { lastT = 0; return; }
           const dt = lastT ? Math.min((now - lastT) / 1000, .05) : 0; lastT = now; NOW = now;
           const T = target(scrollY), ts = now / 1000;
-          // resting poses float: slow bob, sway and tilt (out of sync, so it never looks mechanical)
-          if (T.idle) { T.y += Math.sin(ts * 1.5) * H * .008; T.ry += Math.sin(ts * 1.1) * .25; T.rz += Math.sin(ts * .8 + 1) * .05; T.rx += Math.sin(ts * .95) * .03; }
-          if (!started || !dt) { if (!started) { KEYS.forEach(k => { cur[k] = T[k]; vel[k] = 0; }); started = true; } }
-          else if (T.stage) {
-            // inside the beer stage the can IS the stage can: follow tightly so its spin/drag reads 1:1
-            const k = 1 - Math.exp(-dt / .035);
-            KEYS.forEach(key => { const nv = lerp(cur[key], T[key], k); vel[key] = (nv - cur[key]) / dt; cur[key] = nv; });
-          } else {
-            // soft spring, slightly under-damped; stiffer during the entrance so it keeps to the drawn path
-            const K = T.intro ? 150 : 62, D = 2 * Math.sqrt(K) * (T.intro ? .9 : .74);
-            const n = Math.ceil(dt / (1 / 240)), h = dt / n;
-            for (let i = 0; i < n; i++) KEYS.forEach(key => { vel[key] += (K * (T[key] - cur[key]) - D * vel[key]) * h; cur[key] += vel[key] * h; });
+          if (T.idle) { T.y += Math.sin(ts * 1.5) * H * .007; T.ry += Math.sin(ts * 1.1) * .22; T.rz += Math.sin(ts * .8 + 1) * .045; }
+          // v1: landing on the Beer card gives it a nudge (the can wobbles, the card bumps)
+          const docked = !!T.card && T.k === 1;
+          if (docked && !wasDocked) { nudgeAt = now; if (beerCard) { beerCard.classList.remove("can-bump"); void beerCard.offsetWidth; beerCard.classList.add("can-bump"); } }
+          wasDocked = docked;
+          if (docked) { T.ry += Math.sin(ts * .9) * .18; }
+          if (nudgeAt >= 0) { const t = (now - nudgeAt) / 1000; if (t < 1.4) { const d = Math.exp(-t * 4); T.rz += Math.sin(t * 19) * .3 * d; T.s *= 1 + Math.sin(t * 15) * .07 * d; } }
+          // v2: the fridge pops when the can reaches it
+          const hit = !!T.into && T.k > .86 || (!!T.fridge && T.a > .5);
+          if (fridgeEl && hit && !fridgeHit) { fridgeEl.classList.remove("can-hit"); void fridgeEl.offsetWidth; fridgeEl.classList.add("can-hit"); }
+          fridgeHit = hit;
+          // scrubbed: follow the route closely (Lenis already smooths the scroll); a light filter only removes jitter
+          if (!started || !dt) { if (!started) { KEYS.forEach(k => { cur[k] = T[k]; }); started = true; } }
+          else {
+            const k = 1 - Math.exp(-dt / (T.stage ? .03 : T.intro ? .05 : .075));
+            const px = cur.x, py = cur.y;
+            KEYS.forEach(key => { cur[key] = lerp(cur[key], T[key], k); });
+            vel.x = lerp(vel.x, (cur.x - px) / dt, .2); vel.y = lerp(vel.y, (cur.y - py) / dt, .2);
           }
           const op = T.a.toFixed(3); if (op !== lastOp) { fc.style.opacity = op; lastOp = op; }
           if (T.a < .01) return;
-          // lean into the motion: bank on sideways speed, pitch on vertical speed
-          const bank = T.stage ? 0 : Math.max(-.5, Math.min(.5, -vel.x / W * .9));
-          const pitch = T.stage ? 0 : Math.max(-.35, Math.min(.35, vel.y / H * .45));
+          const bank = T.stage ? 0 : Math.max(-.35, Math.min(.35, -vel.x / W * .5));
+          const pitch = T.stage ? 0 : Math.max(-.25, Math.min(.25, vel.y / H * .3));
           const R = { x: cur.x, y: cur.y, s: cur.s, rx: cur.rx + pitch, ry: cur.ry, rz: cur.rz + bank };
-          // nothing visible changed since the last draw: skip the full-screen WebGL render
           const moved = !drawn || Math.abs(R.x - drawn.x) + Math.abs(R.y - drawn.y) + Math.abs(R.s - drawn.s) > .05 ||
             Math.abs(R.rx - drawn.rx) + Math.abs(R.ry - drawn.ry) + Math.abs(R.rz - drawn.rz) > .0005 || fLabel.map !== labelMat.map;
           if (!moved) return;

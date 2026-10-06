@@ -76,7 +76,7 @@ def page(pid, title, desc, navkey, body):
     extra_css = ('\n<link rel="stylesheet" href="css/home-v2.css">'
                  '\n<link rel="stylesheet" href="css/loader.css">'
                  '\n<link rel="preload" as="image" href="assets/video/hero-video-poster.webp">') if home else ""
-    extra_js = '<script src="js/three.min.js"></script>\n<script src="js/fuzzy-text.js"></script>\n<script src="js/home.js"></script>\n<script src="js/gallery.js"></script>' if home else ""
+    extra_js = '<script src="js/three.min.js"></script>\n<script src="js/lenis.min.js"></script>\n<script src="js/fuzzy-text.js"></script>\n<script src="js/home.js"></script>\n<script src="js/gallery.js"></script>' if home else ""
     if pid == "book":
         extra_js = '<script src="js/tear-ticket.js"></script>'
     if pid == "taps":

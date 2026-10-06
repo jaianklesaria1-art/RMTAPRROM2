@@ -700,3 +700,41 @@ a.rv-src:hover, a.rv-src:focus-visible { color: #141414; background: var(--c); b
 .about.about-simple::before { background: url("../assets/photos/hq-warehouse.webp") center / cover no-repeat !important; filter: brightness(.42) saturate(1.05) !important; inset: -4% 0; transform: scale(1.04); }
 .about.about-simple::after { background: linear-gradient(180deg, var(--ink) 0%, rgba(13,13,13,.25) 18%, rgba(13,13,13,.15) 50%, rgba(13,13,13,.35) 82%, var(--ink) 100%),
   radial-gradient(ellipse 70% 60% at 50% 55%, rgba(13,13,13,.55), transparent 75%) !important; }
+
+/* ===== MOBILE PASS (2026-10-07) ===== */
+/* tag wall: bigger paint cans and tools so they're easy to hit with a thumb */
+@media (max-width: 600px) {
+  .tagwall-tools { gap: 8px; padding: 6px 10px; flex-wrap: nowrap; max-width: calc(100% - 16px); }
+  .tw-can { width: 34px; height: 34px; }
+  .tw-tool { min-height: 40px; padding: 6px 10px; font-size: 1rem; }
+  .tw-sep { height: 28px; }
+}
+@media (max-width: 370px) { .tw-can { width: 30px; height: 30px; } .tagwall-tools { gap: 6px; padding: 6px 8px; } .tw-tool { padding: 6px 7px; } }
+/* tablets (601-860px): What's on cards side by side instead of one thin column with empty space around it */
+@media (min-width: 601px) and (max-width: 860px) {
+  .won-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: none; gap: 22px; }
+  .won-card { padding: 78px 14px 58px; }
+  .won-h { font-size: 1.6rem; }
+  .won-icon { width: 78px; }
+}
+/* phones: hero glass buttons and the HQ board without live blur */
+@media (max-width: 760px) { .btn-glass, .vhero-pause, .tagwall-tools { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; } .vhero-pause { background: rgba(13,13,13,.78); } }
+@media (max-width: 600px) { .tw-can { flex: none; } }
+
+/* ===== can route (2026-10-07) ===== */
+/* Lenis */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+/* v1: the rolling can takes the Beer card's icon spot, so the drawn pint icon steps aside */
+body.can-docks-beer .won-card:first-child .won-icon { visibility: hidden; }
+.won-card.can-bump { animation: canBump .7s cubic-bezier(.3,1.6,.5,1); }
+@keyframes canBump { 0% { transform: rotate(var(--tilt, 0deg)); } 30% { transform: rotate(calc(var(--tilt, 0deg) - 2.5deg)) translateY(4px) scale(1.015); } 100% { transform: rotate(var(--tilt, 0deg)); } }
+/* v2: the fridge grows on hover, and pops when the can goes in */
+.hq3-fridge img { transition: transform .45s cubic-bezier(.3,1.5,.5,1), filter .45s; transform-origin: 50% 90%; }
+.hq3-fridge:hover img { transform: scale(1.05); filter: brightness(1.05) contrast(1.05); }
+.hq3-fridge.can-hit img { animation: fridgePop .8s cubic-bezier(.3,1.6,.5,1); }
+@keyframes fridgePop { 0% { transform: scale(1); } 35% { transform: scale(1.08); filter: brightness(1.15); } 100% { transform: scale(1); } }
+.hq3-fridge { pointer-events: auto; }
+@media (prefers-reduced-motion: reduce) { .won-card.can-bump, .hq3-fridge.can-hit img { animation: none; } .hq3-fridge:hover img { transform: none; } }

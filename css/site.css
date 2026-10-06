@@ -1161,3 +1161,36 @@ body[data-page="parties"] #main, body[data-page="404"] #main { padding-top: 0; }
 /* VERSION 2: every rolling button is a still plate, same colours and rivets (Jai) */
 .rb .rb-face { animation: none !important; transform: none !important; }
 .rb .rb-under { display: none !important; }
+
+/* ===== MOBILE PASS (2026-10-07) ===== */
+/* tap targets: 44px minimum on phones */
+@media (max-width: 760px) {
+  .pill-nav .brand { width: 44px; height: 44px; }
+  .shop-cats .chip { min-height: 44px; display: inline-flex; align-items: center; }
+  .cal-nav { width: 44px; height: 44px; }
+  .cal-day { min-height: 44px; }
+  .slot { min-height: 44px; }
+  .bk-step-btn { width: 48px; height: 48px; }
+  .vhero-pause { min-height: 44px; }
+}
+/* smoother phones: no live background blur (expensive to repaint while scrolling), use a more solid fill instead;
+   bulb frames twinkle with opacity only (animating a drop-shadow filter repaints the whole ring) */
+@media (max-width: 760px) {
+  .site-header, .pill-nav .hd, .shop-side, .rb.btn-line .rb-front, .rb.btn-line .rb-back, body:has(.menu-bg) .board { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+  .pill-nav .hd { background: rgba(18,17,16,.94); }
+  .shop-side { background: rgba(12,12,12,.92); }
+  body:has(.menu-bg) .board { background: rgba(14,14,13,.95); }
+  .rb.btn-line .rb-front { background-color: rgba(18,17,16,.9); }
+  @keyframes bulbTwinkleM { 0% { opacity: 1; } 100% { opacity: .72; } }
+  body[data-page="menu"] .board::before, .bk-form::before, .st-board::before { animation-name: bulbTwinkleM !important; filter: drop-shadow(0 0 3px rgba(255,212,0,.6)); }
+}
+@media (prefers-reduced-motion: reduce) { body[data-page="menu"] .board::before, .bk-form::before, .st-board::before { animation: none !important; } }
+/* tablets 761-960px: the old mobile nav rule (stacked links) leaked into the pill and hid two of the three links */
+@media (min-width: 761px) and (max-width: 960px) {
+  .pill-nav .nav { position: static; }
+  .pill-nav .nav ul { display: flex !important; flex-direction: row; gap: 2px; padding: 0; background: none; border: 0; }
+  .pill-nav .nav a { padding: 8px 12px; font-size: .9rem; border-bottom: 0; border-radius: 999px; }
+  .pill-nav .nav a[aria-current="page"] { box-shadow: none; padding-left: 12px; }
+  .pill-nav .menu-btn { display: none !important; }
+}
+@media (max-width: 760px) { .pill-nav .nav ul { background: #121110 !important; box-shadow: 0 18px 40px rgba(0,0,0,.65); } }
