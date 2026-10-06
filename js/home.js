@@ -482,8 +482,10 @@
             if (fridgeEl && fridgeEl.offsetParent !== null && rect(fridgeEl).height > 0) list.push([Math.max(0, Math.min(C, top(fridgeEl) + rect(fridgeEl).height * .45 - H * .5)), poseFridge]);  // left, into the fridge
             else if (wonSec) list.push([Math.min(C, at(wonSec) + H * .8), () => ({ x: -W * .4, y: H * .4, s: .12 * H, rx: .05, ry: -Math.PI * 2, rz: -.4, idle: 0 })]);   // phones (no fridge): exits left
           } else {
-            list.push([H * .04, () => heroPose(NOW)]);
-            if (aboutSec) list.push([at(aboutSec), () => sidePose("about", m ? .82 : .84, m ? .88 : .5, .4)]);
+            if (D.canHero === false) list.push([0, offRight]);                                // no can in the hero: it flies in from the right
+            else list.push([H * .04, () => heroPose(NOW)]);
+            const aboutLeft = D.canHero === false;                                            // v2: About sits after the stage, so swing left
+            if (aboutSec) list.push([at(aboutSec), () => sidePose("about", aboutLeft ? (m ? .14 : .13) : (m ? .82 : .84), m ? .88 : .5, aboutLeft ? .36 : .4)]);
             list.push([stageAt, poseStage]);
             if (beerCard) list.push([Math.max(0, Math.min(C, top(beerCard) - H * .45)), poseCard]);
           }

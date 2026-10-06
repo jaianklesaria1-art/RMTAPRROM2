@@ -33,7 +33,9 @@ window.RM_DATA = {
   booking: { mode: "netlify", endpoint: "" },
 
   // where the rolling can ends up: "beer-card" (lands on the What's on Beer card) or "fridge" (dives into the Taproom fridge)
-  canRoute: "fridge",
+  canRoute: "beer-card",
+  // false: no can in the hero; it flies in from the right onto the beer stage (v2)
+  canHero: false,
 
   // ---------- hero video (Google Flow) ----------
   // Set to true once hero-intro-*.mp4 / hero-loop-*.mp4 are in assets/video (see ../flow-video/FLOW-BRIEF.md).
