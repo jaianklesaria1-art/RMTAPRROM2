@@ -738,3 +738,52 @@ body.can-docks-beer .won-card:first-child .won-icon { visibility: hidden; }
 @keyframes fridgePop { 0% { transform: scale(1); } 35% { transform: scale(1.08); filter: brightness(1.15); } 100% { transform: scale(1); } }
 .hq3-fridge { pointer-events: auto; }
 @media (prefers-reduced-motion: reduce) { .won-card.can-bump, .hq3-fridge.can-hit img { animation: none; } .hq3-fridge:hover img { transform: none; } }
+
+/* ===================== PHONES v3: home (Jai, 2026-10-07) ===================== */
+.bs-more { display: none; }
+.bs-pop { width: min(560px, calc(100vw - 24px)); max-height: 86dvh; margin: auto; padding: 30px 24px 24px; border: 0; border-radius: 22px; background: #141312; color: #f1ede4; box-shadow: 0 30px 80px rgba(0,0,0,.6); }
+.bs-pop::backdrop { background: rgba(0,0,0,.65); }
+.bs-pop-x { position: absolute; top: 12px; right: 12px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #ffd400; color: #141414; font-size: 1.6rem; line-height: 1; cursor: pointer; }
+.bs-pop-name { margin: 0 44px 6px 0; font: 400 2.4rem/.95 var(--display); text-transform: uppercase; color: #fff; }
+.bs-pop-style { margin: 0; font: 400 1.1rem/1.2 var(--display); text-transform: uppercase; color: #ffd400; }
+.bs-pop-abv { margin: 4px 0 14px; font: 600 .8rem var(--mono); letter-spacing: .1em; text-transform: uppercase; color: rgba(241,237,228,.75); }
+.bs-pop p { color: #e6e1d7; }
+.bs-pop dl { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; margin: 16px 0; padding: 14px 0; border-top: 1px dashed rgba(241,237,228,.3); border-bottom: 1px dashed rgba(241,237,228,.3); }
+.bs-pop dt { font: 600 .66rem var(--mono); letter-spacing: .14em; text-transform: uppercase; color: rgba(241,237,228,.6); }
+.bs-pop dd { margin: 2px 0 0; font: 400 1.15rem var(--display); text-transform: uppercase; color: #fff; }
+.bs-pop dd a { color: #fff; }
+.bs-pop .cta-row { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; }
+@media (max-width: 760px) {
+  /* hero: small icon-only controls, tucked bottom-left (clean, out of the way) */
+  .vhero-ctrls { top: auto !important; bottom: 18px !important; left: 14px; right: auto !important; gap: 8px; }
+  .vhero-ctrls .vhero-pause { width: 40px; height: 40px; min-height: 0 !important; padding: 0 !important; justify-content: center; border-radius: 50%; background: rgba(13,12,11,.55); }
+  .vhero-ctrls .pz-label, .vhero-ctrls .snd-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .vhero-sound:not(.is-on) { animation: none !important; }
+  /* beer stage as a box card: the can sits inside a rounded card; name, style and tagline below; the rest in a pop-up */
+  .bstage { padding: 76px 0 30px !important; }
+  .bs { grid-template-areas: "can" "nav" "left" "right" "more" !important; gap: 0 !important; }
+  .bs-can { grid-area: can; height: 48vh !important; min-height: 300px; margin: 0 6px; border-radius: 28px; background: rgba(255,255,255,.2); border: 2px solid rgba(20,20,20,.14); box-shadow: inset 0 0 40px rgba(255,255,255,.18), 0 18px 34px rgba(0,0,0,.18); }
+  .bs-frame { display: none; }
+  .bs-nav { grid-area: nav; margin-top: 10px; }
+  .bs-left { grid-area: left; margin-top: 8px; }
+  .bs-right { grid-area: right; }
+  .bs-kick, .bs-abv, .bs-label, .bs-hint, .bs-right .bs-desc, .bs-right .bs-specs, .bs-right .bs-small, .bs-right .cta-row { display: none !important; }
+  .bs-name { font-size: clamp(2.3rem, 11vw, 3rem) !important; }
+  .bs-left .bs-style { margin-top: 4px; }
+  .bs-right .bs-tagline { margin: 8px auto 0 !important; max-width: 30ch; text-align: center; }
+  .bs-more { grid-area: more; display: inline-flex; justify-self: center; align-items: center; gap: 8px; margin-top: 16px; padding: 10px 18px; border-radius: 999px; border: 2px solid #141414; background: rgba(20,20,20,.08); color: #141414; font: 400 1rem/1 var(--display); text-transform: uppercase; letter-spacing: .05em; cursor: pointer; }
+  .bs-more span { font: 600 1.2rem/1 var(--ui); }
+  .bstage.bs-dark-labels .bs-more { color: #141414; }
+  .bs-foot { display: none; }
+  /* Taproom: no fridge on phones; the board gets breathing room from its bulbs */
+  .hq3-fridge { display: none !important; }
+  .hq3-box { padding-left: 36px !important; padding-right: 36px !important; }
+  /* Leave your tag: a shorter wall, so the page scrolls easily past it */
+  .tagwall-board { height: 230px !important; }
+}
+/* pop-up: values readable on the dark sheet (the stage's dark-text rules were following the clones) */
+.bs-pop .bs-specs dd, .bs-pop .bs-specs dd a { color: #fff !important; }
+.bs-pop .bs-specs dt { color: rgba(241,237,228,.7) !important; }
+.bs-pop .bs-specs, .bs-pop .bs-specs div, .bs-pop .bs-specs div:nth-child(odd) { border-color: rgba(241,237,228,.3) !important; }
+.bs-pop .bs-small { color: #ffd400 !important; }
+.bs-pop .bs-desc { color: #e6e1d7 !important; font-family: var(--ui) !important; }

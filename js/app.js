@@ -782,8 +782,20 @@
   // mobile nav
   const mb = $(".menu-btn"), nl = $("#nav-list");
   if (mb) {
-    mb.addEventListener("click", () => { const o = nl.classList.toggle("open"); mb.setAttribute("aria-expanded", o); mb.setAttribute("aria-label", o ? "Close menu" : "Menu"); });
-    document.addEventListener("keydown", e => { if (e.key === "Escape" && nl.classList.contains("open")) { nl.classList.remove("open"); mb.setAttribute("aria-expanded", false); mb.setAttribute("aria-label", "Menu"); mb.focus(); } });
+    // phones: a full-screen panel drops down from the top (after Tout Bien's mobile menu); the icon morphs into an X
+    const panel = $("#mnav");
+    const setMenu = open => {
+      if (!panel) { const o = nl.classList.toggle("open", open); mb.setAttribute("aria-expanded", o); return; }
+      mb.setAttribute("aria-expanded", open); mb.setAttribute("aria-label", open ? "Close menu" : "Menu");
+      document.documentElement.classList.toggle("menu-open", open);
+      if (open) { panel.hidden = false; requestAnimationFrame(() => requestAnimationFrame(() => panel.classList.add("is-open"))); setTimeout(() => { const f = $("a", panel); if (f) f.focus({ preventScroll: true }); }, 380); }
+      else { panel.classList.remove("is-open"); setTimeout(() => { if (!panel.classList.contains("is-open")) panel.hidden = true; }, 450); }
+      if (window.RM_LENIS) open ? window.RM_LENIS.stop() : window.RM_LENIS.start();
+    };
+    mb.addEventListener("click", () => setMenu(mb.getAttribute("aria-expanded") !== "true"));
+    if (panel) panel.addEventListener("click", e => { if (e.target.closest("a")) setMenu(false); });
+    document.addEventListener("keydown", e => { if (e.key === "Escape" && mb.getAttribute("aria-expanded") === "true") { setMenu(false); mb.focus(); } });
+    addEventListener("resize", () => { if (innerWidth > 960 && mb.getAttribute("aria-expanded") === "true") setMenu(false); });
   }
 
   /* rolling buttons (Jai's reference recording): the label sits on a drum with riveted corners; on hover or

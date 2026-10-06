@@ -119,12 +119,32 @@ def page(pid, title, desc, navkey, body):
       </nav>
       <div class="hd-actions">
         <a class="btn btn-solid rb-static nav-book" href="book.html" data-track="Book a table">Book a table</a>
-        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-list" aria-label="Menu"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Menu"><span class="mb-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
       </div>
     </div>
     <button class="hd-expand" type="button" aria-label="Show navigation" tabindex="-1"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
   </div>
 </header>
+
+<div class="mnav" id="mnav" hidden>
+  <nav class="mnav-in" aria-label="Menu">
+    <ul class="mnav-main">
+      <li><a href="on-tap.html">On tap</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="book.html">Book a table</a></li>
+      <li><a href="parties.html">Private parties</a></li>
+      <li><a href="story.html">Our story</a></li>
+    </ul>
+    <ul class="mnav-sub">
+      <li><a href="{ORDER}" target="_blank" rel="noopener" data-track="Order beer">Order on AirMenus</a></li>
+      <li><a href="tel:+917400407711" data-track="Call">Call +91 74004 07711</a></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=19.15123,72.8317709" target="_blank" rel="noopener" data-track="Directions">Get directions</a></li>
+      <li><a href="https://www.instagram.com/rollingmillsbrewery/" target="_blank" rel="noopener">Instagram</a></li>
+    </ul>
+    <a class="mnav-cta" href="book.html" data-track="Book a table">Book a table</a>
+  </nav>
+</div>
+
 
 <main id="main">
 {body}
@@ -174,13 +194,6 @@ def page(pid, title, desc, navkey, body):
     <p>© Rolling Mills Brewery LLP</p>
   </div>
 </footer>
-
-<nav class="actionbar" aria-label="Quick actions">
-  <a href="book.html" data-track="Book a table">{icon("book")}<span>Book</span></a>
-  <a href="{ORDER}" target="_blank" rel="noopener" data-track="Order beer">{icon("order")}<span>Order<span class="sr"> beer on AirMenus</span></span></a>
-  <a href="tel:+917400407711" data-track="Call">{icon("call")}<span>Call</span></a>
-  <a href="https://www.google.com/maps/search/?api=1&amp;query=19.15123,72.8317709" target="_blank" rel="noopener" data-track="Directions">{icon("map")}<span>Directions</span></a>
-</nav>
 
 <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-h" hidden>
   <div class="gate-card">

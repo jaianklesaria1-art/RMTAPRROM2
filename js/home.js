@@ -479,7 +479,8 @@
             list.push([stageAt, poseStage]);                                                  // flies in from the right onto the stage
             if (aboutSec) list.push([at(aboutSec), () => sidePose("about", m ? .14 : .13, m ? .86 : .5, .36)]);   // left
             if (wonSec) list.push([at(wonSec), () => sidePose("won", m ? .88 : .88, m ? .16 : .3, .26)]);         // right
-            if (fridgeEl) list.push([Math.max(0, Math.min(C, top(fridgeEl) + rect(fridgeEl).height * .45 - H * .5)), poseFridge]);  // left, into the fridge
+            if (fridgeEl && fridgeEl.offsetParent !== null && rect(fridgeEl).height > 0) list.push([Math.max(0, Math.min(C, top(fridgeEl) + rect(fridgeEl).height * .45 - H * .5)), poseFridge]);  // left, into the fridge
+            else if (wonSec) list.push([Math.min(C, at(wonSec) + H * .8), () => ({ x: -W * .4, y: H * .4, s: .12 * H, rx: .05, ry: -Math.PI * 2, rz: -.4, idle: 0 })]);   // phones (no fridge): exits left
           } else {
             list.push([H * .04, () => heroPose(NOW)]);
             if (aboutSec) list.push([at(aboutSec), () => sidePose("about", m ? .82 : .84, m ? .88 : .5, .4)]);
@@ -754,5 +755,27 @@
   addEventListener("pointermove", e => { if (down) track.scrollLeft = down.s - (e.clientX - down.x); });
   addEventListener("pointerup", () => { if (down) { down = null; track.classList.remove("dragging"); } });
   addEventListener("resize", sync); sync();
+})();
+
+/* ---------- beer stage on phones: name, style and tagline stay on the card; the rest opens in a pop-up ---------- */
+(function beerPop() {
+  const btn = document.querySelector("[data-bs-more]"), dlg = document.querySelector("[data-bs-pop]"); if (!btn || !dlg) return;
+  const body = dlg.querySelector("[data-bs-pop-body]");
+  const grab = sel => { const el = document.querySelector(sel); return el ? el.cloneNode(true) : null; };
+  btn.addEventListener("click", () => {
+    body.innerHTML = "";
+    const h = document.createElement("h3"); h.id = "bs-pop-h"; h.className = "bs-pop-name"; h.textContent = (document.querySelector("[data-bs-name]") || {}).textContent || "";
+    const style = grab("[data-bs-style]"), abv = grab("[data-bs-abv]");
+    body.append(h);
+    if (style) { style.className = "bs-pop-style"; style.removeAttribute("data-bs-style"); body.append(style); }
+    if (abv) { abv.className = "bs-pop-abv"; abv.removeAttribute("data-bs-abv"); body.append(abv); }
+    [".bs-right [data-bs-desc]", ".bs-right [data-bs-specs]", ".bs-right [data-bs-small]", ".bs-right .cta-row"].forEach(sel => {
+      const el = grab(sel); if (!el) return; [...el.attributes].forEach(a => { if (a.name.startsWith("data-bs")) el.removeAttribute(a.name); }); body.append(el); });
+    document.body.classList.add("has-overlay");
+    dlg.showModal ? dlg.showModal() : dlg.setAttribute("open", "");
+  });
+  const close = () => { if (dlg.open) dlg.close(); };
+  dlg.addEventListener("close", () => { document.body.classList.remove("has-overlay"); btn.focus({ preventScroll: true }); });
+  dlg.addEventListener("click", e => { if (e.target === dlg || e.target.closest("[data-bs-pop-close]")) close(); });
 })();
 })();

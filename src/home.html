@@ -44,6 +44,7 @@
         <a class="btn btn-line btn-glass" data-bs-details href="on-tap.html">Details</a>
       </div>
     </div>
+    <button class="bs-more" type="button" data-bs-more aria-haspopup="dialog">More about this beer <span aria-hidden="true">+</span></button>
     <div class="bs-nav">
       <button class="bs-arrow" type="button" data-dir="-1" aria-label="Previous beer">←</button>
       <p class="bs-count" aria-live="polite"><b data-bs-i>01</b> / <span data-bs-n>09</span> <span class="bs-count-name" data-bs-label></span></p>
@@ -51,6 +52,10 @@
     </div>
   </div>
   <p class="wrap bs-foot"><span data-updated></span> · <a href="on-tap.html">Full tap list →</a> · <span class="bs-note-inline">3D can is a concept render with the real label art.</span></p>
+  <dialog class="bs-pop" data-bs-pop aria-labelledby="bs-pop-h">
+    <button class="bs-pop-x" type="button" data-bs-pop-close aria-label="Close">&times;</button>
+    <div class="bs-pop-body" data-bs-pop-body></div>
+  </dialog>
 </section>
 
 <!-- ============ ABOUT: graffiti-wall background (v2), copy centred ============ -->

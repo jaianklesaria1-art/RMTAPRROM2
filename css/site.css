@@ -1194,3 +1194,72 @@ body[data-page="parties"] #main, body[data-page="404"] #main { padding-top: 0; }
   .pill-nav .menu-btn { display: none !important; }
 }
 @media (max-width: 760px) { .pill-nav .nav ul { background: #121110 !important; box-shadow: 0 18px 40px rgba(0,0,0,.65); } }
+
+/* ===================== PHONES v3 (Jai, 2026-10-07) ===================== */
+/* bottom quick-action bar removed (its links moved into the menu panel) */
+.actionbar { display: none !important; }
+@media (max-width: 860px) { body, body[data-page="book"] { padding-bottom: 0 !important; } }
+/* menu panel: drops down from the top, big slanted links (after Tout Bien's mobile nav) */
+.mnav { position: fixed; inset: 0; z-index: 58; background: var(--yellow); color: #141414; clip-path: inset(0 0 100% 0); transition: clip-path .5s cubic-bezier(.7,0,.2,1); overflow-y: auto; }
+.mnav[hidden] { display: none; }
+.mnav.is-open { clip-path: inset(0 0 0 0); }
+.mnav-in { min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; padding: 96px 24px 32px; text-align: center; }
+.mnav ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.mnav-main a { display: inline-block; padding: 4px 8px; font: italic 400 clamp(2.2rem, 11vw, 3.2rem)/1 var(--display); text-transform: uppercase; letter-spacing: .01em; color: #141414; text-decoration: none; transform: skewX(-6deg); }
+.mnav-sub a { display: inline-block; padding: 7px 8px; font: 600 1.05rem var(--ui); color: #141414; text-decoration: none; }
+.mnav-cta { display: block; width: min(100%, 360px); padding: 17px 20px; border-radius: 10px; background: #141414; color: var(--yellow); font: 400 1.25rem/1 var(--display); text-transform: uppercase; letter-spacing: .06em; text-decoration: none; }
+.mnav a:focus-visible { outline: 3px solid #141414; outline-offset: 3px; }
+.mnav li, .mnav-cta { opacity: 0; transform: translateY(-14px); transition: opacity .35s, transform .45s cubic-bezier(.2,1.2,.4,1); }
+.mnav.is-open li, .mnav.is-open .mnav-cta { opacity: 1; transform: none; }
+.mnav.is-open li:nth-child(1) { transition-delay: .18s; } .mnav.is-open li:nth-child(2) { transition-delay: .23s; } .mnav.is-open li:nth-child(3) { transition-delay: .28s; }
+.mnav.is-open li:nth-child(4) { transition-delay: .33s; } .mnav.is-open li:nth-child(5) { transition-delay: .38s; } .mnav.is-open .mnav-cta { transition-delay: .45s; }
+html.menu-open { overflow: hidden; }
+/* morphing hamburger: three lines turn into an X */
+.mb-lines { position: relative; display: block; width: 20px; height: 14px; }
+.mb-lines i { position: absolute; left: 0; width: 100%; height: 2px; border-radius: 2px; background: currentColor; transition: transform .35s cubic-bezier(.6,0,.2,1), opacity .2s, top .35s cubic-bezier(.6,0,.2,1); }
+.mb-lines i:nth-child(1) { top: 0; } .mb-lines i:nth-child(2) { top: 6px; } .mb-lines i:nth-child(3) { top: 12px; }
+.menu-btn[aria-expanded="true"] .mb-lines i:nth-child(1) { top: 6px; transform: rotate(45deg); }
+.menu-btn[aria-expanded="true"] .mb-lines i:nth-child(2) { opacity: 0; transform: scaleX(.2); }
+.menu-btn[aria-expanded="true"] .mb-lines i:nth-child(3) { top: 6px; transform: rotate(-45deg); }
+@media (max-width: 760px) {
+  /* the nav: a white logo pill on the left; Book + a round menu button on the right */
+  .site-header.pill-nav { left: 12px !important; right: 12px !important; top: 12px !important; transform: none !important; width: auto; z-index: 60; }
+  body[data-page="home"] .site-header.pill-nav { transform: translateY(-140%) !important; }
+  body[data-page="home"].nav-in .site-header.pill-nav, html.menu-open .site-header.pill-nav { transform: none !important; }
+  .pill-nav .hd { width: auto !important; max-width: none; background: none !important; border: 0 !important; box-shadow: none !important; overflow: visible !important; }
+  .pill-nav .hd-in { width: 100%; justify-content: space-between; padding: 0; gap: 8px; }
+  .pill-nav .brand { height: 48px; padding: 0 16px 0 6px; border-radius: 999px; background: #fff; box-shadow: 0 6px 16px rgba(0,0,0,.25); margin: 0; }
+  .pill-nav .brand img { width: 38px; height: 38px; }
+  .pill-nav .brand::after { content: "Rolling Mills"; margin-left: 8px; font: 400 1.05rem/1 var(--display); text-transform: uppercase; letter-spacing: .04em; color: #141414; }
+  .pill-nav .nav { display: none; }
+  .pill-nav .hd-actions { margin-left: auto; gap: 8px; }
+  .pill-nav .hd-actions .btn { min-height: 0; }
+  .pill-nav .menu-btn { display: grid !important; place-items: center; width: 48px; height: 48px; border-radius: 14px; border: 0; background: #fff; color: #141414; box-shadow: 0 6px 16px rgba(0,0,0,.25); }
+  html.menu-open .pill-nav .menu-btn { background: #141414; color: var(--yellow); }
+  html.menu-open .pill-nav .nav-book { visibility: hidden; }
+  /* smaller buttons on phones */
+  .rb { --h: 40px; }
+  .rb-face { padding: 0 16px; font-size: .86rem; }
+  .rb.btn-lg { --h: 46px; }
+  .about-links a.rb { --h: 40px; }
+  .about-links a.rb .rb-face { font-size: 1.02rem; }
+  .pill-nav .rb { --h: 40px; }
+  /* light-bulb boards: a small gap between the bulbs and the text */
+  body[data-page="menu"] .board { padding-left: 36px !important; padding-right: 36px !important; }
+  .bk-form, .st-board { padding-left: 36px !important; padding-right: 36px !important; }
+  /* footer: the opening-hours card stays inside the frame */
+  .ft2-cols { grid-template-columns: minmax(0, 1fr) !important; }
+  .ft2-card { min-width: 0; max-width: 100%; padding: 22px 18px; }
+  .ft2-card .ft-hours, .ft2-hours { min-width: 0; }
+  .ft2-hours > div, .ft2-card dl > div { flex-wrap: wrap; gap: 4px 10px; min-width: 0; }
+  .ft2-hours dd, .ft2-hours dt { min-width: 0; overflow-wrap: anywhere; }
+}
+@media (prefers-reduced-motion: reduce) { .mnav { transition: none; } .mnav li, .mnav-cta { transition: none; opacity: 1; transform: none; } }
+@media (max-width: 760px) {
+  .pill-nav .brand { display: inline-flex !important; flex-direction: row; align-items: center; white-space: nowrap; }
+}
+@media (max-width: 760px) {
+  .pill-nav .hd-in > .brand { height: 48px !important; padding: 0 16px 0 5px !important; border-radius: 999px !important; background: #fff !important; box-shadow: 0 6px 16px rgba(0,0,0,.28) !important; opacity: 1 !important; transform: none !important; }
+  .pill-nav .hd-in > .brand::after { color: #141414 !important; }
+}
+@media (max-width: 760px) { .pill-nav .hd-in > .brand { width: auto !important; min-width: 0 !important; max-width: none !important; } }
