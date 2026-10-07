@@ -1272,3 +1272,18 @@ html.menu-open { overflow: hidden; }
 @media (max-width: 760px) {
   .mnav-sub a { font: 400 1.15rem/1.2 var(--display); text-transform: uppercase; letter-spacing: .06em; }
 }
+
+/* beer can shine: the Book a table light sweep, clipped to each can's shape (Jai). Not on the rolling 3D can. */
+.can-shine { position: relative; display: inline-block; line-height: 0; vertical-align: top; transition: transform .5s cubic-bezier(.2,1.4,.4,1); }
+.can-shine > img { transform: none !important; }
+.can-gloss { position: absolute; inset: 0; pointer-events: none; -webkit-mask-position: center; mask-position: center; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  background: linear-gradient(100deg, transparent 43%, rgba(255,255,255,.9) 50%, transparent 57%) 100% 0 / 300% 100% no-repeat;
+  animation: canSheen 3.2s ease-in-out infinite; }
+@keyframes canSheen { 0%, 40% { background-position: 100% 0; } 80%, 100% { background-position: 0 0; } }
+.shop-can .can-shine { height: 100%; }
+.shop-card:hover .shop-can .can-shine, .shop-card:focus-visible .shop-can .can-shine { transform: translateY(-10px) rotate(-4deg) scale(1.04); }
+.mi-pic-can .can-shine { transform: rotate(-6deg); transition-duration: .4s; }
+.menu-item:hover .mi-pic-can .can-shine { transform: translateY(-4px) rotate(-3deg) scale(1.06); }
+.st-can .can-shine { transform: rotate(calc((var(--i) - 2) * 4deg)); }
+.st-can:hover .can-shine, .st-can:focus-visible .can-shine { transform: translateY(-14px) rotate(0deg) scale(1.05); }
+@media (prefers-reduced-motion: reduce) { .can-gloss { animation: none; opacity: 0; } }

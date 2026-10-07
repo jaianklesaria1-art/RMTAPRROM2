@@ -140,7 +140,7 @@
     if (!grid) return;
     const shop = grid.classList.contains("shop-grid");
     const shopCard = b => `<button class="beer shop-card" type="button" aria-haspopup="dialog" data-slug="${b.slug}" data-group="${esc(b.group)}">
-      <span class="shop-can"><img src="assets/cans/${b.slug}.webp" alt="" width="223" height="380" loading="lazy"></span>
+      <span class="shop-can"><span class="can-shine"><img src="assets/cans/${b.slug}.webp" alt="" width="223" height="380" loading="lazy"><i class="can-gloss" style="-webkit-mask-image:url(assets/cans/${b.slug}.webp);mask-image:url(assets/cans/${b.slug}.webp)" aria-hidden="true"></i></span></span>
       <span class="shop-name">${esc(b.name)}</span>
       <span class="shop-style">${esc(b.style)} · ${b.abv}%</span>
       <span class="shop-price">₹${b.sizes[0][1].toLocaleString("en-IN")} <small>${esc(b.sizes[0][0])}</small><span class="shop-plus" aria-hidden="true">+</span></span>
@@ -264,7 +264,7 @@
   function menuItem(item, kind) {
     const diet = item.veg ? '<span class="diet diet-veg" role="img" aria-label="Vegetarian"></span>' : '<span class="diet diet-nonveg" role="img" aria-label="Non-vegetarian"></span>';
     if (kind === "beer") {
-      return `<div class="menu-item has-pic" id="item-${item.slug}"><span class="mi-pic mi-pic-can"><img src="assets/cans/${item.slug}.webp" alt="" width="223" height="380" loading="lazy"></span><h3>${esc(item.name)} <span class="beer-abv">${item.abv}%</span></h3>
+      return `<div class="menu-item has-pic" id="item-${item.slug}"><span class="mi-pic mi-pic-can"><span class="can-shine"><img src="assets/cans/${item.slug}.webp" alt="" width="223" height="380" loading="lazy"><i class="can-gloss" style="-webkit-mask-image:url(assets/cans/${item.slug}.webp);mask-image:url(assets/cans/${item.slug}.webp)" aria-hidden="true"></i></span></span><h3>${esc(item.name)} <span class="beer-abv">${item.abv}%</span></h3>
         <span class="price">${priceText(item.sizes[0])}</span><p>${esc(item.style)}. ${esc(item.desc)}</p>
         <p class="pair"><a href="on-tap.html#${item.slug}">Details</a> · <a href="${P.orderUrl}" target="_blank" rel="noopener" data-track="Order beer">Order on AirMenus<span class="sr"> (opens AirMenus)</span></a></p></div>`;
     }
@@ -766,7 +766,7 @@
     if (cans) {
       const seen = new Set(), pick = D.beers.filter(b => b.status !== "sold-out" && !/pack/i.test(b.name) && !seen.has(b.group) && seen.add(b.group));
       cans.innerHTML = pick.map((b, i) => `<a class="st-can" href="on-tap.html#${b.slug}" style="--i:${i}">
-        <img src="assets/cans/${b.slug}.webp" alt="" width="223" height="380" loading="lazy">
+        <span class="can-shine"><img src="assets/cans/${b.slug}.webp" alt="" width="223" height="380" loading="lazy"><i class="can-gloss" style="-webkit-mask-image:url(assets/cans/${b.slug}.webp);mask-image:url(assets/cans/${b.slug}.webp)" aria-hidden="true"></i></span>
         <span class="st-can-name">${esc(b.name)}</span><span class="st-can-style">${esc(b.group)}</span></a>`).join("");
     }
     // reveal chapters as they scroll in
